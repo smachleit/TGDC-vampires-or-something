@@ -1,0 +1,47 @@
+{
+    "startRoundConfident": [
+        ""
+    ],
+    "startRoundNeutral": [
+        ""
+    ],
+    "startRoundUnconfident": [
+        ""
+    ],
+    "loseRoundConfident": [
+        ""
+    ],
+    "loseRoundCheated": [
+        ""
+    ],
+    "loseRoundNeutral": [
+        ""
+    ],
+    "loseRoundUnconfident": [
+        ""
+    ],
+    "winRoundConfident": [
+        ""
+    ],
+    "winRoundNeutral": [
+        ""
+    ],
+    "winRoundUnconfident": [
+        ""
+    ],
+    "caughtCheating": [
+        ""
+    ],
+    "healthThreeFourths": [
+        ""
+    ],
+    "healthOneHalf": [
+        ""
+    ],
+    "healthOneFourth": [
+        ""
+    ],
+    "ragequit": [
+        ""
+    ]
+}
