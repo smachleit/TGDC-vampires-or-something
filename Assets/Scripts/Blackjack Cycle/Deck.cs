@@ -5,18 +5,18 @@ public class Deck : Singleton<Deck>
     public static Deck Instance { get; private set; }
 
     enum ranks {
-        one, two, three,
-        four, five, six,
-        seven, eight, nine,
-        jack, queen, king, ace
+        ONE, TWO, THREE,
+        FOUR, FIVE, SIX,
+        SEVEN, EIGHT, NINE,
+        JACK, QUEEN, KING, ACE;
     }
 
     enum suits
     {
-        spades, clubs, hearts, diamonds
+        SPADES, CLUBS, HEARTS, DIAMONDS;
     }
 
-    struct deck
+    struct card
     {
         int rank;
         int suit;
@@ -25,7 +25,7 @@ public class Deck : Singleton<Deck>
     const int ROWS = 4;
     const int COLS = 13;
 
-    void shuffle (namespace 
+    void shuffle ()
     {
     // insert animation
 
@@ -47,14 +47,48 @@ public class Deck : Singleton<Deck>
     void Start()
     {
 
-        deck[,] deckCards = new deck[ROWS, COLS];
+        card[,] deck = new card[ROWS, COLS];
 
         for (int j = 0; j < COLS; j++)
         {
             for (int i = 0; i < ROWS; i++)
             {
-                DeckCards[j][i].deck.rank = i + 1;
-                deckCards[j][i].deck.suit = i + 1;
+                if (i == ONE)
+                    deck[j][i].card.rank = ONE;
+                else if (i == TWO)
+                    deck[j][i].card.rank = TWO;
+                else if (i == THREE)
+                    deck[j][i].card.rank = THREE;
+                else if (i == FOUR)
+                    deck[j][i].card.rank = FOUR;
+                else if (i == FIVE)
+                    deck[j][i].card.rank = FIVE;
+                else if (i == SIX)
+                    deck[j][i].card.rank = SIX;
+                else if (i == SEVEN)
+                    deck[j][i].card.rank = SEVEN;
+                else if (i == EIGHT)
+                    deck[j][i].card.rank = EIGHT;
+                else if (i == NINE)
+                    deck[j][i].card.rank = NINE;
+                else if (i == JACK)
+                    deck[j][i].card.rank = JACK;
+                else if (i == QUEEN)
+                    deck[j][i].card.rank = QUEEN;
+                else if (i == KING)
+                    deck[j][i].card.rank = KING;
+                else if (i == ACE)
+                    deck[j][i].card.rank = ACE;
+
+
+                if (j == SPADES)
+                    deckCards[j][i].deck.suit = SPADES;
+                if (j == SLUBS)
+                    deckCards[j][i].deck.suit = CLUBS;
+                if (j == SPADES)
+                    deckCards[j][i].deck.suit = HEARTS;
+                if (j == DIAMONDS)
+                    deckCards[j][i].deck.suit = DIAMONDS;
             }
         }
 
