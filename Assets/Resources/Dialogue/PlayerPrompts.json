@@ -1,0 +1,23 @@
+{
+    "compliment": {
+        "prompt": [
+            "He looks sad.",
+            "Maybe I should encourage him a bit",
+            "Please don't leave yet, I haven't killed you."
+        ],
+        "options": [
+            "Compliment",
+            "Nah"
+        ],
+        "reply1": [
+            "You tell him that his graphic tee really brings the look together",
+            "You tell him that he really had you sweating for a moment (he didn't)",
+            "You compliment his stupid hair"
+        ],
+        "reply2": [
+            "His ego doesn't need to get any bigger",
+            "You try to think of something nice to say, but nothing comes to mind",
+            "I'm not gonna be the substitute for a loving father"
+        ]
+    }
+}
