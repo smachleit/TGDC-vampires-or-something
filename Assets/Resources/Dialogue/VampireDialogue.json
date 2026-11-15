@@ -6,7 +6,7 @@
         ""
     ],
     "startRoundUnconfident": [
-        ""
+        ". . ."
     ],
     "loseRoundConfident": [
         ""
@@ -33,7 +33,8 @@
         ""
     ],
     "healthThreeFourths": [
-        ""
+        "grr im so angry",
+        "im gonna steal all the kings"
     ],
     "healthOneHalf": [
         ""
@@ -42,6 +43,13 @@
         ""
     ],
     "ragequit": [
+        ""
+    ],
+    "recieveCompliment": [
+        "See you get me!",
+        "Hell yeah bro"
+    ],
+    "rejectCompliment": [
         ""
     ]
 }

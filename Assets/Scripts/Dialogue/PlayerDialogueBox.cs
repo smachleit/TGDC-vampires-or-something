@@ -41,8 +41,6 @@ public class PlayerDialogueBox : DialogueBox
         enter.performed += context => SubmitResponse();
         selectedOption = 1;
         prompts.LoadDialogue(promptsSource);
-
-        StartCoroutine(Prompt("compliment", x => Debug.Log("You picked:" + x)));
     }
 
     protected override void Update()
@@ -64,6 +62,9 @@ public class PlayerDialogueBox : DialogueBox
         }
 
         yield return new WaitUntil(() => _textFullyLoaded);
+
+        // wait a bit for player to read
+        yield return new WaitForSeconds(0.5f);
     }
 
     public IEnumerator PlayDialogueFromPrompt(string promptName, string status)
@@ -79,6 +80,9 @@ public class PlayerDialogueBox : DialogueBox
         }
 
         yield return new WaitUntil(() => _textFullyLoaded);
+
+        // wait a bit for player to read
+        yield return new WaitForSeconds(0.5f);
     }
 
     public IEnumerator Prompt(string promptName, System.Action<int> response)
@@ -105,7 +109,6 @@ public class PlayerDialogueBox : DialogueBox
     private void MoveCursor(InputAction.CallbackContext context)
     {
         float cursor = context.ReadValue<float>();
-        Debug.Log("moving!" + cursor);
 
         if (cursor < 0)
         {
