@@ -2,28 +2,32 @@ using UnityEngine;
 
 public class Deck : Singleton<Deck>
 {
-    public static Deck Instance { get; private set; }
-
-    enum ranks {
-        ONE, TWO, THREE,
+    enum Ranks
+    {
+        TWO, THREE,
         FOUR, FIVE, SIX,
-        SEVEN, EIGHT, NINE,
-        JACK, QUEEN, KING, ACE;
+        SEVEN, EIGHT, NINE, TEN,
+        JACK, QUEEN, KING, ACE
     }
 
-    enum suits
+    enum Suits
     {
-        SPADES, CLUBS, HEARTS, DIAMONDS;
+        SPADES, CLUBS, HEARTS, DIAMONDS
     }
 
-    struct card
+    public class Card
     {
-        int rank;
-        int suit;
+        int rank = 0;
+        int suit = 0;
     }
 
     const int ROWS = 4;
     const int COLS = 13;
+
+    int s_size = COLS;
+    int c_size = COLS;
+    int h_size = COLS;
+    int d_size = COLS;
 
     void shuffle ()
     {
@@ -41,58 +45,82 @@ public class Deck : Singleton<Deck>
             deck[w][z] = temp;
         }
     }
-}
+    }
+
+    void remove(int j) 
+    {
+        if (j == (int)Suits.SPADES)
+            s_size -= 1;
+        else if (z == (int)Suits.CLUBS)
+            c_size -= 1;
+        else if (z == (int)Suits.HEARTS)
+            h_size -= 1;
+        else if (z == (int)Suits.DIAMONDS)
+            d_size -= 1;
+    }
+
+    void add(Card card21)
+    {
+        deck.Add(card);
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        List<List<Card>> deck = new List<List<Card>>(ROWS);
 
-        card[,] deck = new card[ROWS, COLS];
+        for (int i = 0; i < ROWS; i++)
+        {
+            deck.Add(new List<Card>(new List<Card>[COLS]));
+        }
+
+        int t = 0;
 
         for (int j = 0; j < COLS; j++)
         {
-            for (int i = 0; i < ROWS; i++)
+            for (t; t < ROWS; t++)
             {
-                if (i == ONE)
-                    deck[j][i].card.rank = ONE;
-                else if (i == TWO)
-                    deck[j][i].card.rank = TWO;
-                else if (i == THREE)
-                    deck[j][i].card.rank = THREE;
-                else if (i == FOUR)
-                    deck[j][i].card.rank = FOUR;
-                else if (i == FIVE)
-                    deck[j][i].card.rank = FIVE;
-                else if (i == SIX)
-                    deck[j][i].card.rank = SIX;
-                else if (i == SEVEN)
-                    deck[j][i].card.rank = SEVEN;
-                else if (i == EIGHT)
-                    deck[j][i].card.rank = EIGHT;
-                else if (i == NINE)
-                    deck[j][i].card.rank = NINE;
-                else if (i == JACK)
-                    deck[j][i].card.rank = JACK;
-                else if (i == QUEEN)
-                    deck[j][i].card.rank = QUEEN;
-                else if (i == KING)
-                    deck[j][i].card.rank = KING;
-                else if (i == ACE)
-                    deck[j][i].card.rank = ACE;
-
-
-                if (j == SPADES)
-                    deckCards[j][i].deck.suit = SPADES;
-                if (j == SLUBS)
-                    deckCards[j][i].deck.suit = CLUBS;
-                if (j == SPADES)
-                    deckCards[j][i].deck.suit = HEARTS;
-                if (j == DIAMONDS)
-                    deckCards[j][i].deck.suit = DIAMONDS;
+                if (t == (int)Ranks.TWO)
+                    deck[j][t].rank = Ranks.TWO;
+                else if (t == (int)Ranks.THREE)
+                    deck[j][t].rank = Ranks.THREE;
+                else if (t == (int)Ranks.FOUR)
+                    deck[j][t].rank = Ranks.FOUR;
+                else if (t == (int)Ranks.FIVE)
+                    deck[j][t].rank = Ranks.FIVE;
+                else if (t == (int)Ranks.SIX)
+                    deck[j][t].rank = Ranks.SIX;
+                else if (t == (int)Ranks.SEVEN)
+                    deck[j][t].rank = Ranks.SEVEN;
+                else if (t == (int)Ranks.EIGHT)
+                    deck[j][t].rank = Ranks.EIGHT;
+                else if (t == (int)Ranks.NINE)
+                    deck[j][t].card.rank = Ranks.NINE;
+                else if (t == (int)Ranks.TEN)
+                    deck[j][t].rank = Ranks.TEN;
+                else if (t == (int)Ranks.JACK)
+                    deck[j][t].rank = Ranks.JACK;
+                else if (t == (int)Ranks.QUEEN)
+                    deck[j][t].rank = Ranks.QUEEN;
+                else if (t == (int)Ranks.KING)
+                    deck[j][t].rank = Ranks.KING;
+                else if (t == (int)Ranks.ACE)
+                    deck[j][t].rank = Ranks.ACE;
             }
+
+            if (j == (int)Suits.SPADES)
+                deck[j][t].suit = Suits.SPADES;
+            if (j == (int)Suits.CLUBS)
+                deck[j][t].suit = Suits.CLUBS;
+            if (j == (int)Suits.SPADES)
+                deck[j][t].suit = Suits.HEARTS;
+            if (j == (int)Suits.DIAMONDS)
+                deck[j][t].suit = Suits.DIAMONDS;
+
         }
 
     }
+
 
     // Update is called once per frame
     void Update()
