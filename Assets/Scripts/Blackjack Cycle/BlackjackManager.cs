@@ -7,6 +7,9 @@ public class BlackjackManager : Singleton<BlackjackManager>
     VampHand vampHand;
     Card vampStashedCard;
     public Deck deck;
+    
+    bool bustVamp;
+    bool bustPlayer;
 
     bool playerTurn;
 
@@ -20,6 +23,8 @@ public class BlackjackManager : Singleton<BlackjackManager>
     public void StartRound()
     {
         playerTurn = true;
+        bustVamp = false;
+        bustPlayer = false;
     }
 
     public void EndRound()
@@ -29,7 +34,10 @@ public class BlackjackManager : Singleton<BlackjackManager>
 
     public void PlayerHit()
     {
-        
+        if (playerTurn) 
+        { 
+            
+        }
     }
 
     public void PlayerStand()
@@ -74,6 +82,8 @@ abstract class Hand
     public GameObject[] cardDisplay;
     int total;
 
+    public void Hand();
+
     public virtual void AddCard(Card card)
     {
         cards.Add(card);
@@ -88,10 +98,18 @@ abstract class Hand
 
 class PlayerHand : Hand
 {
-    
+    PlayerHand() 
+    {
+        base();
+    }
+
+
 }
 
 class VampHand : Hand
 {
-    
+    VampHand() 
+    {
+        base();
+    }
 }
