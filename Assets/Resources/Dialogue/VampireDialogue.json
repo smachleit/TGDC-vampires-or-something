@@ -1,0 +1,55 @@
+{
+    "startRoundConfident": [
+        ""
+    ],
+    "startRoundNeutral": [
+        ""
+    ],
+    "startRoundUnconfident": [
+        ". . ."
+    ],
+    "loseRoundConfident": [
+        ""
+    ],
+    "loseRoundCheated": [
+        ""
+    ],
+    "loseRoundNeutral": [
+        ""
+    ],
+    "loseRoundUnconfident": [
+        ""
+    ],
+    "winRoundConfident": [
+        ""
+    ],
+    "winRoundNeutral": [
+        ""
+    ],
+    "winRoundUnconfident": [
+        ""
+    ],
+    "caughtCheating": [
+        ""
+    ],
+    "healthThreeFourths": [
+        "grr im so angry",
+        "im gonna steal all the kings"
+    ],
+    "healthOneHalf": [
+        ""
+    ],
+    "healthOneFourth": [
+        ""
+    ],
+    "ragequit": [
+        ""
+    ],
+    "recieveCompliment": [
+        "See you get me!",
+        "Hell yeah bro"
+    ],
+    "rejectCompliment": [
+        ""
+    ]
+}

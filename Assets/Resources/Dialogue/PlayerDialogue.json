@@ -1,0 +1,55 @@
+{
+    "startRoundConfident": [
+        "There's a glint in his eyes.",
+        "He's cocky.",
+        "He's staring at me like he can already taste my blood.",
+        "I should be careful about my next move..."
+    ],
+    "startRoundUnconfident": [
+        "He looks frustrated.",
+        "Not so smug now.",
+        "He keeps eyeing the door."
+    ],
+    "startRoundNeutral": [
+        ""
+    ],
+    "loseRoundConfident": [
+        ""
+    ],
+    "loseRoundCheated": [
+        ""
+    ],
+    "loseRoundNeutral": [
+        ""
+    ],
+    "loseRoundUnconfident": [
+        ""
+    ],
+    "winRoundConfident": [
+        ""
+    ],
+    "winRoundCheated": [
+        ""
+    ],
+    "winRoundNeutral": [
+        ""
+    ],
+    "winRoundUnconfident": [
+        ""
+    ],
+    "caughtCheating": [
+        ""
+    ],
+    "healthThreeFourths": [
+        ""
+    ],
+    "healthOneHalf": [
+        ""
+    ],
+    "healthOneFourth": [
+        ""
+    ],
+    "ragequit": [
+        ""
+    ]
+}
