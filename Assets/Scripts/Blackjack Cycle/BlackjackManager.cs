@@ -8,6 +8,8 @@ public class BlackjackManager : Singleton<BlackjackManager>
     Card vampStashedCard;
     public Deck deck;
 
+    bool playerTurn;
+
     override protected void Awake()
     {
         base.Awake();
@@ -17,6 +19,51 @@ public class BlackjackManager : Singleton<BlackjackManager>
 
     public void StartRound()
     {
+        playerTurn = true;
+    }
+
+    public void EndRound()
+    {
+        
+    }
+
+    public void PlayerHit()
+    {
+        
+    }
+
+    public void PlayerStand()
+    {
+        
+    }
+
+    public void PlayerBust()
+    {
+        
+    }
+
+    public void PlayerRaise()
+    {
+        
+    }
+
+    public void VampireHit()
+    {
+        
+    }
+
+    public void VampireStand()
+    {
+        
+    }
+
+    public void VampireBust()
+    {
+        
+    }
+
+    public void VampireRaise()
+    {
         
     }
 }
@@ -25,10 +72,12 @@ abstract class Hand
 {
     public List<Card> cards;
     public GameObject[] cardDisplay;
+    int total;
 
     public virtual void AddCard(Card card)
     {
         cards.Add(card);
+        total += (int)card.rank + 1;
     }
 
     public virtual void ClearHand()
