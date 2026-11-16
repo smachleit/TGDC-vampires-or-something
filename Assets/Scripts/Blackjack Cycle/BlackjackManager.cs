@@ -23,7 +23,9 @@ public class BlackjackManager : Singleton<BlackjackManager>
 
     //input tracking
     InputAction move;
+    bool listenMove;
     InputAction enter;
+    bool listenEnter;
     int selectedOption;
 
     override protected void Awake()
@@ -41,6 +43,9 @@ public class BlackjackManager : Singleton<BlackjackManager>
         move.performed += context => MoveCursor(context);
         enter = InputSystem.actions.FindAction("Enter");
         enter.performed += context => SelectAction();
+
+        listenEnter = false;
+        listenMove = false;
     }
 
     public void test()
@@ -70,8 +75,8 @@ public class BlackjackManager : Singleton<BlackjackManager>
         yield return StartCoroutine(dialogue.RoundStart(game.vampConfidence));
 
         selectedOption = 1;
-        move.Enable();
-        enter.Enable();
+        listenEnter = true;
+        listenMove = true;
         PlayerActions.Instance.ActivateActions();
 
         // END PLAYER PHASE
@@ -83,7 +88,7 @@ public class BlackjackManager : Singleton<BlackjackManager>
 
     public void EndRound()
     {
-        if (!playerHand.bust || !vampHand.bust)
+        if (!playerHand.bust && !vampHand.bust)
         {
             if (playerHand.total > vampHand.total)
                 playerWinR = true;
@@ -106,15 +111,22 @@ public class BlackjackManager : Singleton<BlackjackManager>
         cardDisplays[playerHand.size].Draw(card);
         playerHand.AddCard(card);
 
-        checkBust(playerHand);
+        CheckBust(playerHand);
     }
 
-    public void checkBust(Hand h)
+    public void CheckBust(Hand h)
     {
         if (h.total > 21)
         {
             h.bust = true;
-            EndRound();
+            playerTurn = false;
+        }   else if (h.total == 21)
+        {
+            playerTurn = false;
+            playerTurn = false;
+        }   else if (h.cards.Count == 5)
+        {
+            playerTurn = false;
         }
     }
 
@@ -130,21 +142,11 @@ public class BlackjackManager : Singleton<BlackjackManager>
 
     public void VampireHit()
     {
-        Card card = deck.Draw();
-        cardDisplays[playerHand.size].Draw(card);
-        playerHand.AddCard(card);
+        // Card card = deck.Draw();
+        // cardDisplays[playerHand.size].Draw(card);
+        // playerHand.AddCard(card);
 
-        checkBust(vampHand);
-    }
-
-    public void VampireStand()
-    {
-        
-    }
-
-    public void VampireRaise()
-    {
-        
+        // CheckBust(vampHand);
     }
 
     public void PlayVampire()
@@ -169,6 +171,10 @@ public class BlackjackManager : Singleton<BlackjackManager>
 
     private void MoveCursor(InputAction.CallbackContext context)
     {
+        if (!listenMove)
+        {
+            return;
+        }
         float cursor = context.ReadValue<float>();
 
         if (cursor > 0 && selectedOption > 0)
@@ -186,6 +192,11 @@ public class BlackjackManager : Singleton<BlackjackManager>
 
     private void SelectAction()
     {
+        if (!listenEnter)
+        {
+            return;
+        }
+        
         switch (selectedOption)
         {
             case 0: 
