@@ -7,11 +7,9 @@ public class BlackjackManager : Singleton<BlackjackManager>
     VampHand vampHand;
     Card vampStashedCard;
     public Deck deck;
-    
-    bool vampBust;
-    bool playerBust;
 
     bool playerTurn;
+    bool playerWinRound;
 
     override protected void Awake()
     {
@@ -34,9 +32,19 @@ public class BlackjackManager : Singleton<BlackjackManager>
 
     public void PlayerHit()
     {
-        if (playerTurn) 
+        Card card = deck.Draw();
+        cardDisplays[playerHand.size].Draw(card);
+        playerHand.AddCard(card);
+
+        checkBust(playerHand);
+    }
+
+    public void checkBust(Hand h)
+    {
+        if (h.total > 21)
         {
-            playerHand.AddCard(deck.Draw());
+            h.bust = true;
+            EndRound();
         }
     }
 
@@ -52,19 +60,14 @@ public class BlackjackManager : Singleton<BlackjackManager>
 
     public void VampireHit()
     {
-        if (playerTurn)
-        {
-            if (!playerBust)
-            vampHand.AddCard(deck.Draw());
-        }
+        Card card = deck.Draw();
+        cardDisplays[playerHand.size].Draw(card);
+        playerHand.AddCard(card);
+
+        checkBust(vampHand);
     }
 
     public void VampireStand()
-    {
-        
-    }
-
-    public void check(Hand h)
     {
         
     }

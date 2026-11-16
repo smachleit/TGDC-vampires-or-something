@@ -30,13 +30,20 @@ public class GameManager : Singleton<GameManager>
     public void LoseHP(int playerLoss, int vampLoss)
     {
         playerHP -= playerLoss;
-        vampHP -= vampLoss;
 
         if (playerHP < healthThresholds[playerHPStatus - 1])
         {
             StartCoroutine(dialogue.HealthThresholdCrossed(playerHPStatus, -1));
             playerHPStatus--;
         }
+        
+        if (playerHP <= 0)
+            StartCoroutine(GameOver("PlayerDeath");
+    }
+
+    public void LosePlayerHP(int vampLoss) 
+    {
+        vampHP -= vampLoss;
 
         if (vampHP < healthThresholds[vampHPStatus - 1])
         {
@@ -44,13 +51,8 @@ public class GameManager : Singleton<GameManager>
             vampHPStatus--;
         }
 
-        if (playerHP <= 0)
-        {
-            StartCoroutine(GameOver("PlayerDeath"));
-        }   else if (vampHP <= 0)
-        {
+        if (vampHP <= 0)
             StartCoroutine(GameOver("VampireDeath"));
-        }
     }
 
     public void VampAdjustConfidence(int change)
