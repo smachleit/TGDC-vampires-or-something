@@ -8,8 +8,8 @@ public class BlackjackManager : Singleton<BlackjackManager>
     Card vampStashedCard;
     public Deck deck;
     
-    bool bustVamp;
-    bool bustPlayer;
+    bool vampBust;
+    bool playerBust;
 
     bool playerTurn;
 
@@ -35,17 +35,12 @@ public class BlackjackManager : Singleton<BlackjackManager>
     public void PlayerHit()
     {
         if (playerTurn) 
-        { 
-            
+        {
+            playerHand.AddCard(deck.Draw());
         }
     }
 
     public void PlayerStand()
-    {
-        
-    }
-
-    public void PlayerBust()
     {
         
     }
@@ -57,7 +52,11 @@ public class BlackjackManager : Singleton<BlackjackManager>
 
     public void VampireHit()
     {
-        
+        if (playerTurn)
+        {
+            if (!playerBust)
+            vampHand.AddCard(deck.Draw());
+        }
     }
 
     public void VampireStand()
@@ -65,7 +64,7 @@ public class BlackjackManager : Singleton<BlackjackManager>
         
     }
 
-    public void VampireBust()
+    public void check(Hand h)
     {
         
     }
@@ -102,8 +101,6 @@ class PlayerHand : Hand
     {
         base();
     }
-
-
 }
 
 class VampHand : Hand
