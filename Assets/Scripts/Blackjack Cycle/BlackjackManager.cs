@@ -10,6 +10,8 @@ public class BlackjackManager : Singleton<BlackjackManager>
     PlayerHand playerHand;
     VampHand vampHand;
     Card vampStashedCard;
+    int bet;
+    const MAX_BET = 3;
     public Deck deck;
     
     public CardDisplay[] cardDisplays;
@@ -55,6 +57,7 @@ public class BlackjackManager : Singleton<BlackjackManager>
         vampHand.bust = false;
         playerWinR = false;
         selectedOption = 1;
+        bet = 0;
         WaitForSeconds pause = new(0.2f);
 
         // Both players draw two cards
@@ -89,13 +92,14 @@ public class BlackjackManager : Singleton<BlackjackManager>
                 playerWinR = false;
         }
         else if (playerHand.bust)
-        {
             playerWinR = false;
-        }
         else
-        {
             playerWinR = true;
-        }
+
+        if (playerWinR)
+            game.LosePlayerHP();
+        else
+            game.LoseVampHP();
     }
 
     public void PlayerHit()
@@ -118,12 +122,16 @@ public class BlackjackManager : Singleton<BlackjackManager>
 
     public void PlayerStand()
     {
-        
+        playerTurn = false;
     }
 
     public void PlayerRaise()
     {
-        
+        bet += 1;
+
+        // Temporary switch for blurring out raise button
+        if (bet == 3)
+            bool tempSwitch = true;
     }
 
     public void VampireHit()
@@ -137,12 +145,7 @@ public class BlackjackManager : Singleton<BlackjackManager>
 
     public void VampireStand()
     {
-        
-    }
-
-    public void VampireRaise()
-    {
-        
+        EndRound();
     }
 
     public void PlayVampire()
