@@ -74,39 +74,3 @@ public class BlackjackManager : Singleton<BlackjackManager>
         
     }
 }
-
-abstract class Hand
-{
-    public List<Card> cards;
-    public GameObject[] cardDisplay;
-    int total;
-
-    public void Hand();
-
-    public virtual void AddCard(Card card)
-    {
-        cards.Add(card);
-        total += (int)card.rank + 1;
-    }
-
-    public virtual void ClearHand()
-    {
-        cards.Clear();
-    }
-}
-
-class PlayerHand : Hand
-{
-    PlayerHand() 
-    {
-        base();
-    }
-}
-
-class VampHand : Hand
-{
-    VampHand() 
-    {
-        base();
-    }
-}
