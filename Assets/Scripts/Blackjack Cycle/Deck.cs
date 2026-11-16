@@ -16,6 +16,7 @@ public class Deck : MonoBehaviour
     void Awake()
     {
         allCards = (List<int>)Enumerable.Range(0, 52);
+        deckState = new();
         random = new();
     }
 
