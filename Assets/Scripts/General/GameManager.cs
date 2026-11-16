@@ -27,7 +27,7 @@ public class GameManager : Singleton<GameManager>
         vampHPStatus = 3;
     }
 
-    public void LoseHP(int playerLoss, int vampLoss)
+    public void LosePlayerHP(int playerLoss)
     {
         playerHP -= playerLoss;
 
@@ -41,7 +41,7 @@ public class GameManager : Singleton<GameManager>
             StartCoroutine(GameOver("PlayerDeath"));
     }
 
-    public void LosePlayerHP(int vampLoss) 
+    public void LoseVampHP(int vampLoss) 
     {
         vampHP -= vampLoss;
 

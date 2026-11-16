@@ -88,7 +88,7 @@ public class BlackjackManager : Singleton<BlackjackManager>
             else
                 playerWinR = false;
         }
-        else if (player.bust)
+        else if (playerHand.bust)
         {
             playerWinR = false;
         }
