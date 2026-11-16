@@ -7,14 +7,13 @@ using UnityEngine.InputSystem;
 
 public class BlackjackManager : Singleton<BlackjackManager>
 {
-    PlayerHand playerHand;
-    VampHand vampHand;
+    public PlayerHand playerHand;
+    public VampHand vampHand;
     Card vampStashedCard;
     int bet;
     const int MAX_BET = 3;
     public Deck deck;
     
-    public CardDisplay[] cardDisplays;
     bool playerTurn;
     bool playerBlackjack;
     bool vampBlackjack;
@@ -33,8 +32,6 @@ public class BlackjackManager : Singleton<BlackjackManager>
     override protected void Awake()
     {
         base.Awake();
-        playerHand = new();
-        vampHand = new();
     }
 
     void Start()
@@ -64,7 +61,7 @@ public class BlackjackManager : Singleton<BlackjackManager>
         vampHand.bust = false;
         playerWinR = false;
         bet = 0;
-        WaitForSeconds pause = new(0.2f);
+        WaitForSeconds pause = new(2.5f);
 
         // Both players draw two cards
         PlayerHit();
@@ -87,6 +84,8 @@ public class BlackjackManager : Singleton<BlackjackManager>
         move.Disable();
         enter.Enable();
         PlayerActions.Instance.DeactivateActions();
+
+        StartCoroutine(PlayVampire());
     }
 
     public void EndRound()
@@ -112,7 +111,6 @@ public class BlackjackManager : Singleton<BlackjackManager>
     public void PlayerHit()
     {
         Card card = deck.Draw();
-        cardDisplays[playerHand.size].Draw(card);
         playerHand.AddCard(card);
 
         CheckBust(playerHand);
@@ -126,7 +124,6 @@ public class BlackjackManager : Singleton<BlackjackManager>
             playerTurn = false;
         }   else if (h.total == 21)
         {
-            playerTurn = false;
             playerTurn = false;
         }   else if (h.cards.Count == 5)
         {
@@ -142,31 +139,39 @@ public class BlackjackManager : Singleton<BlackjackManager>
     public void PlayerRaise()
     {
         bet += 1;
+        GlassDisplay.Instance.Raise();
 
         // Temporary switch for blurring out raise button
-        // if (bet == 3)
-        //     // bool tempSwitch = true;
+        if (bet == 3)
+        {
+            selectedOption = 1;
+            PlayerActions.Instance.DeactivateRaise();
+        }
     }
 
     public void VampireHit()
     {
-        // Card card = deck.Draw();
-        // cardDisplays[playerHand.size].Draw(card);
-        // playerHand.AddCard(card);
+        Card card = deck.Draw();
+        vampHand.AddCard(card);
 
         // CheckBust(vampHand);
     }
 
-    public void PlayVampire()
+    public IEnumerator PlayVampire()
     {
+        vampHand.StartTurn();
+        yield return new WaitForSeconds(2);
+
         if (playerHand.bust || vampHand.total > playerHand.total)
         {
             EndRound();
         }
 
-        while (vampHand.total < 17)
+        while (vampHand.total < 17 || (vampHand.total < playerHand.total && !playerHand.bust))
         {
             VampireHit();
+
+            yield return new WaitForSeconds(1);
 
             if (playerHand.bust || vampHand.cards.Count == 5) 
             {
@@ -184,8 +189,9 @@ public class BlackjackManager : Singleton<BlackjackManager>
             return;
         }
         float cursor = context.ReadValue<float>();
+        int disableRaise = (bet == MAX_BET) ? 1 : 0;
 
-        if (cursor > 0 && selectedOption > 0)
+        if (cursor > 0 && selectedOption > disableRaise)
         {
             selectedOption -= 1;
         }   else if (cursor < 0 && selectedOption < 2)
@@ -195,7 +201,7 @@ public class BlackjackManager : Singleton<BlackjackManager>
 
         PlayerActions.Instance.UpdateCurrentAction(selectedOption);
 
-        Debug.Log("Cursor moved: " + selectedOption);
+        // Debug.Log("Cursor moved: " + selectedOption);
     }
 
     private void SelectAction()

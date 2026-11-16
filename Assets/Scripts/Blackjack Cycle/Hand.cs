@@ -6,7 +6,6 @@ public abstract class Hand : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public List<Card> cards;
-    public CardDisplay[] cardDisplays;
     public int total;
     private int aces;
     public int size;
@@ -14,11 +13,10 @@ public abstract class Hand : MonoBehaviour
     public bool bust;
     // public bool winR;
 
-    protected Hand()
+    protected void Awake()
     {
         cards = new();
         bust = false;
-        // winR = false;
     }
 
     public virtual void AddCard(Card card)
@@ -52,20 +50,5 @@ public abstract class Hand : MonoBehaviour
     public virtual void ClearHand()
     {
         cards.Clear();
-    }
-
-    public int getHandTotal()
-    {
-        return total;
-    }
-
-    void Start()
-    {
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {       
     }
 }

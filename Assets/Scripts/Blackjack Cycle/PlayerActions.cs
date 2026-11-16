@@ -41,4 +41,10 @@ public class PlayerActions : Singleton<PlayerActions>
         }
         buttons[1].SetCategoryAndLabel("HIT", "selected");
     }
+
+    public void DeactivateRaise()
+    {
+        UpdateCurrentAction(1);
+        buttons[0].SetCategoryAndLabel("RAISE", "inactive");
+    }
 }

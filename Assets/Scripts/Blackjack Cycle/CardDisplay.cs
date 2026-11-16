@@ -15,7 +15,7 @@ public class CardDisplay : MonoBehaviour
         animator.SetTrigger("spawn");
     }
 
-    public void RoundEnd()
+    public void Clear()
     {
         animator.SetTrigger("hide");
     }
