@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 363f23704f619439688c1542a3612dc2
+guid: 2828bff68272b41b489a8f8f60fc9d24
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2805674201130793307
-    second: holyshot_0
+      213: -1075961565170996708
+    second: Card_3Spades_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -72,10 +72,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 256
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: holyshot_0
+      name: Card_3Spades_0
       rect:
         serializedVersion: 2
-        x: 19
-        y: 7
-        width: 108
-        height: 149
+        x: 0
+        y: 0
+        width: 160
+        height: 245
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5a60f1edd2e3019d0800000000000000
-      internalID: -2805674201130793307
+      spriteID: c1a620c38aa6111f0800000000000000
+      internalID: -1075961565170996708
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      holyshot_0: -2805674201130793307
+      Card_3Spades_0: -1075961565170996708
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
