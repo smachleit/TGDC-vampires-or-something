@@ -87,6 +87,7 @@ public class PlayerDialogueBox : DialogueBox
 
     public IEnumerator Prompt(string promptName, System.Action<int> response)
     {
+        submit = false;
         // Play prompt text
         yield return StartCoroutine(PlayDialogueFromPrompt(promptName, "prompt"));
         // Wait until done to display options
@@ -94,8 +95,8 @@ public class PlayerDialogueBox : DialogueBox
         opt1.text = prompts.GetOption1(promptName);
         opt2.text = prompts.GetOption2(promptName);
         
-        move.Enable();
-        enter.Enable();
+        // move.Enable();
+        // enter.Enable();
         
         yield return new WaitUntil(() => submit);
 
@@ -125,8 +126,8 @@ public class PlayerDialogueBox : DialogueBox
 
     private void SubmitResponse()
     {
-        move.Disable();
-        enter.Disable();
+        // move.Disable();
+        // enter.Disable();
 
         submit = true;
     }

@@ -33,12 +33,12 @@ public class BlackjackManager : Singleton<BlackjackManager>
         base.Awake();
         playerHand = new();
         vampHand = new();
-        deck = new();
     }
 
     void Start()
     {
         dialogue = DialogueManager.Instance;
+        game = GameManager.Instance;
         move = InputSystem.actions.FindAction("NavigateVertical");
         move.performed += context => MoveCursor(context);
         enter = InputSystem.actions.FindAction("Enter");
@@ -55,7 +55,8 @@ public class BlackjackManager : Singleton<BlackjackManager>
         playerTurn = true;
         bustVamp = false;
         bustPlayer = false;
-        selectedOption = 1;
+        selectedOption = -1;
+        deck.Shuffle();
         WaitForSeconds pause = new(0.2f);
 
         // Both players draw two cards
@@ -67,13 +68,14 @@ public class BlackjackManager : Singleton<BlackjackManager>
         yield return pause;
         VampireHit();
 
-        StartCoroutine(dialogue.RoundStart(game.vampConfidence));
+        yield return StartCoroutine(dialogue.RoundStart(game.vampConfidence));
 
+        selectedOption = 1;
         move.Enable();
         enter.Enable();
         PlayerActions.Instance.ActivateActions();
 
-
+        // END PLAYER PHASE
         yield return new WaitUntil(() => !playerTurn);
         move.Disable();
         enter.Enable();
@@ -90,6 +92,7 @@ public class BlackjackManager : Singleton<BlackjackManager>
         Card card = deck.Draw();
         cardDisplays[playerHand.size].Draw(card);
         playerHand.AddCard(card);
+        Debug.Log("Hit!");
     }
 
     public void PlayerStand()
@@ -141,26 +144,30 @@ public class BlackjackManager : Singleton<BlackjackManager>
     {
         float cursor = context.ReadValue<float>();
 
-        if (cursor < 0 && selectedOption > 0)
+        if (cursor > 0 && selectedOption > 0)
         {
             selectedOption -= 1;
-        }   else if (cursor > 0 && selectedOption < 2)
+        }   else if (cursor < 0 && selectedOption < 2)
         {
             selectedOption += 1;
         }
+
+        PlayerActions.Instance.UpdateCurrentAction(selectedOption);
+
+        Debug.Log("Cursor moved: " + selectedOption);
     }
 
     private void SelectAction()
     {
         switch (selectedOption)
         {
-            case 1: 
+            case 0: 
                 PlayerRaise();
                 break;
-            case 2: 
+            case 1: 
                 PlayerHit();
                 break;
-            case 3:
+            case 2:
                 PlayerStand();
                 break;
         }

@@ -34,6 +34,7 @@ public class PlayerActions : Singleton<PlayerActions>
 
     public void ActivateActions()
     {
+        selected = 1;
         foreach (SpriteResolver button in buttons)
         {
             button.SetCategoryAndLabel(button.GetCategory(), "active");

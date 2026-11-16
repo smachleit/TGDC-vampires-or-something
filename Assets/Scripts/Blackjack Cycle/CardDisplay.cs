@@ -8,14 +8,9 @@ public class CardDisplay : MonoBehaviour
     public SpriteResolver spriteResolver;
     public Animator animator;
 
-    public void test()
-    {
-        card = new(Suite.SPADE, Rank.FOUR);
-        Draw(card);
-    }
-
     public void Draw(Card card)
     {
+        Debug.Log(card.suite.ToString() + " " + card.rank.ToString());
         spriteResolver.SetCategoryAndLabel(card.suite.ToString(), card.rank.ToString());
         animator.SetTrigger("spawn");
     }
