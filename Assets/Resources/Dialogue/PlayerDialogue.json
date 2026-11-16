@@ -11,10 +11,14 @@
         "He keeps eyeing the door."
     ],
     "startRoundNeutral": [
-        ""
+        "He's acting as if he doesn't care.",
+        "Can't stand this guy.", 
+        "Smells like condescension." 
     ],
     "loseRoundConfident": [
-        ""
+        "He's looking down on me.",
+        "He keeps glancing at my cards and laughing.", 
+        "He's acting as if he's already won."
     ],
     "loseRoundCheated": [
         ""
