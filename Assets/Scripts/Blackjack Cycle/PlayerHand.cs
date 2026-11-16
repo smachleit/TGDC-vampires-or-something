@@ -1,9 +1,7 @@
 using UnityEngine;
 
-public class playerHand : Hand
+public class PlayerHand : Hand
 {
-    bust = false;
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {

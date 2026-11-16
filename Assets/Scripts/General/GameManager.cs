@@ -38,7 +38,7 @@ public class GameManager : Singleton<GameManager>
         }
         
         if (playerHP <= 0)
-            StartCoroutine(GameOver("PlayerDeath");
+            StartCoroutine(GameOver("PlayerDeath"));
     }
 
     public void LosePlayerHP(int vampLoss) 
