@@ -16,6 +16,7 @@ public class BlackjackManager : Singleton<BlackjackManager>
     bool playerTurn;
     bool playerBlackjack;
     bool vampBlackjack;
+    bool playerWinR;
 
     DialogueManager dialogue;
     GameManager game;
@@ -52,8 +53,7 @@ public class BlackjackManager : Singleton<BlackjackManager>
         playerTurn = true;
         playerHand.bust = false;
         vampHand.bust = false;
-        // playerHand.winR = false;
-        // vampHand.winR = false;
+        playerWinR = false;
         selectedOption = 1;
         WaitForSeconds pause = new(0.2f);
 
@@ -81,10 +81,21 @@ public class BlackjackManager : Singleton<BlackjackManager>
 
     public void EndRound()
     {
-        //if (!playerHand.bust)
-            //playerHand.winR = true;
-        //else
-            //vampHand.winR = true;
+        if (!playerHand.bust || !vampHand.bust)
+        {
+            if (playerHand.total > vampHand.total)
+                playerWinR = true;
+            else
+                playerWinR = false;
+        }
+        else if (player.bust)
+        {
+            playerWinR = false;
+        }
+        else
+        {
+            playerWinR = true;
+        }
     }
 
     public void PlayerHit()
