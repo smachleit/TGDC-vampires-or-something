@@ -11,7 +11,6 @@ public class BlackjackManager : Singleton<BlackjackManager>
     VampHand vampHand;
     Card vampStashedCard;
     int bet;
-    const MAX_BET = 3;
     public Deck deck;
     
     public CardDisplay[] cardDisplays;
@@ -19,6 +18,8 @@ public class BlackjackManager : Singleton<BlackjackManager>
     bool playerBlackjack;
     bool vampBlackjack;
     bool playerWinR;
+
+    const int MAX_BET = 3;
 
     DialogueManager dialogue;
     GameManager game;
@@ -97,9 +98,9 @@ public class BlackjackManager : Singleton<BlackjackManager>
             playerWinR = true;
 
         if (playerWinR)
-            game.LosePlayerHP();
+            game.LosePlayerHP(bet);
         else
-            game.LoseVampHP();
+            game.LoseVampHP(bet);
     }
 
     public void PlayerHit()
@@ -130,8 +131,9 @@ public class BlackjackManager : Singleton<BlackjackManager>
         bet += 1;
 
         // Temporary switch for blurring out raise button
-        if (bet == 3)
-            bool tempSwitch = true;
+        bool tempSwitch;
+        if (bet == MAX_BET)
+            tempSwitch = true;
     }
 
     public void VampireHit()
