@@ -33,6 +33,7 @@ public class BlackjackManager : Singleton<BlackjackManager>
         base.Awake();
         playerHand = new();
         vampHand = new();
+        deck = new();
     }
 
     void Start()
@@ -42,6 +43,11 @@ public class BlackjackManager : Singleton<BlackjackManager>
         move.performed += context => MoveCursor(context);
         enter = InputSystem.actions.FindAction("Enter");
         enter.performed += context => SelectAction();
+    }
+
+    public void test()
+    {
+        StartCoroutine(StartRound());
     }
 
     public IEnumerator StartRound()
@@ -81,10 +87,9 @@ public class BlackjackManager : Singleton<BlackjackManager>
 
     public void PlayerHit()
     {
-        if (playerTurn) 
-        { 
-            
-        }
+        Card card = deck.Draw();
+        cardDisplays[playerHand.size].Draw(card);
+        playerHand.AddCard(card);
     }
 
     public void PlayerStand()
@@ -168,6 +173,7 @@ public abstract class Hand
     public CardDisplay[] cardDisplays;
     public int total;
     private int aces;
+    public int size;
 
     protected Hand()
     {
@@ -198,7 +204,7 @@ public abstract class Hand
             total -= 10;
             aces--;
         }
-
+        size++;
     }
 
     public virtual void ClearHand()
