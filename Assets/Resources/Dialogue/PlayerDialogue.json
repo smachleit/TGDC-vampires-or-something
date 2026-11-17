@@ -13,47 +13,73 @@
     "startRoundNeutral": [
         "He's acting as if he doesn't care.",
         "Can't stand this guy.", 
-        "Smells like condescension." 
+        "Smells like condescension.", 
+        "He's talking to an 'associate' on his phone. The phone is off." 
+        "You can see him messaging someone under the table about how he's 'mogging' you. Whatever that means." 
     ],
     "loseRoundConfident": [
-        "He's looking down on me.",
+        "He's looking down on me, he's not even phased.",
         "He keeps glancing at my cards and laughing.", 
         "He's acting as if he's already won."
     ],
     "loseRoundCheated": [
-        ""
+        "Of course he would cheat, why am I not suprised?",
+        "I should be on the lookout for any hidden cards...",
+        "Completely unfair- but I could've payed better attention..."
     ],
     "loseRoundNeutral": [
-        ""
+        "Just one loss isn't the end of the world.",
+        "At least he's not rubbing it in too much...",
+        "Ignore him and focus on doing better next round."
     ],
     "loseRoundUnconfident": [
-        ""
+        "Maybe with a win he won't whine so much",
+        "At least that'll stop him from throwing a tantrum...",
+        "He's looking at me with such a pathetic expression, even though he won.."    
     ],
     "winRoundConfident": [
-        ""
+        "Maybe that'll teach him to not talk so much.",
+        "Where's all that bravado now?",
+        "A lot more bark than bite." 
     ],
     "winRoundCheated": [
-        ""
+        "He can't even win while cheating, how pathetic.",
+        "Serves him right for trying to circumvent the deal.", 
+        "Of course someone like him would stoop so low." 
     ],
     "winRoundNeutral": [
-        ""
+        "Good, a few more of those and I win.",
+        "What was I worried about? This guy is nothing.",
+        "Is he really a blood sucking monster? He acts more like a child."
     ],
     "winRoundUnconfident": [
-        ""
+        "I almost feel bad for kicking him while he's down. Nevermind, I'm over it.",
+        "Getting all moody isn't going to suddenly make me feel bad for him.",
+        "This guy's personality flips on a dime..."
     ],
     "caughtCheating": [
-        ""
+        "Hey, don't think I don't see you messing with the cards!",
+        "Seriously? Trying to cheat? Are you really that unconfident?",
+        "I thought vampires were supposed to be noble." 
     ],
     "healthThreeFourths": [
-        ""
+        "It's fine, a little damage like this is nothing to worry about.",
+        "I should stay confident, I can't give him anything to gloat about.", 
+        "Just a drop won't hurt..." 
     ],
     "healthOneHalf": [
-        ""
+        "Shit... I might need to start taking this seriously.",
+        "He's not as stupid as I thought...",
+        "He's just getting lucky, if I play this right I can still win." 
     ],
     "healthOneFourth": [
-        ""
+        "I can't tell if he's actually skilled or just stupidly lucky...",
+        "How the hell did he get this much blood out of me...?" 
+        "Everyone loves an underdog... I can win this if I focus." 
     ],
     "ragequit": [
-        ""
+        "He seriously gave up...?",
+        "I figured the guy was a loser, but I didn't expect him to just give up like that.",
+        "I shouldn't have let him get away though... he might do this to someone else..." 
     ]
 }
