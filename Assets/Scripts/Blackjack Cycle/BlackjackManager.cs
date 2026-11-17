@@ -33,6 +33,8 @@ public class BlackjackManager : Singleton<BlackjackManager>
     override protected void Awake()
     {
         base.Awake();
+
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start()

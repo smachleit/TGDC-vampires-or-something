@@ -22,6 +22,8 @@ public class GameManager : Singleton<GameManager>
     {
         dialogue = DialogueManager.Instance;
         blackjack = BlackjackManager.Instance;
+
+        DontDestroyOnLoad(gameObject);
     }
 
     public void GameStart()
