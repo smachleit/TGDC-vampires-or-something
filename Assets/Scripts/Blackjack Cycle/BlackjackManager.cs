@@ -18,9 +18,11 @@ public class BlackjackManager : Singleton<BlackjackManager>
     bool playerBlackjack;
     bool vampBlackjack;
     string roundResult;
+    int streak;
 
     DialogueManager dialogue;
     GameManager game;
+    [SerializeField]private Animator vampSprite;
 
     //input tracking
     InputAction move;
@@ -28,6 +30,7 @@ public class BlackjackManager : Singleton<BlackjackManager>
     InputAction enter;
     bool listenEnter;
     int selectedOption;
+    
 
     private readonly WaitForSeconds pause = new(1.5f);
     override protected void Awake()
@@ -80,6 +83,15 @@ public class BlackjackManager : Singleton<BlackjackManager>
         if (bet == 3)
         {
             PlayerActions.Instance.DeactivateRaise();
+        }   else if (game.vampConfidence > 80)
+        {
+            //all in baby
+            PlayerActions.Instance.DeactivateRaise();
+            while (bet < 5)
+            {
+                bet += 1;
+                GlassDisplay.Instance.Raise();
+            }
         }
 
         // END PLAYER PHASE
@@ -97,6 +109,7 @@ public class BlackjackManager : Singleton<BlackjackManager>
 
         Debug.Log("PlayerHand: " + playerHand.total + " Vampire Hand: " + vampHand.total);
         roundResult = DetermineWinner();
+        CalculateConfidence();
         Debug.Log(roundResult);
 
         //let everything finish first
@@ -107,12 +120,14 @@ public class BlackjackManager : Singleton<BlackjackManager>
         //fill shot glasses
         if (roundResult == "win")
         {
+            vampSprite.SetTrigger("lose");
             GlassDisplay.Instance.Fill(true);
             yield return StartCoroutine(dialogue.WinPrompt(x =>
             {
                 if (x == 1)
                 {
                     game.HealPlayerHP(bet);
+                    
                 }   else if (x == 2)
                 {
                     game.LoseVampHP(bet);
@@ -126,6 +141,7 @@ public class BlackjackManager : Singleton<BlackjackManager>
             yield return StartCoroutine(dialogue.RoundEnd(game.vampConfidence, roundResult, false));
         }   else if (roundResult == "lose")
         {
+            vampSprite.SetTrigger("win");
             GlassDisplay.Instance.Fill(false);
             yield return StartCoroutine(dialogue.RoundEnd(game.vampConfidence, roundResult, false));
             GlassDisplay.Instance.Clear();
@@ -281,6 +297,57 @@ public class BlackjackManager : Singleton<BlackjackManager>
     }
 
     private void CalculateConfidence () {
+        int adjustment = 0;
+        if (roundResult == "lose")
+        {
+            if (streak < 0)
+            {
+                streak--;
+            }   else
+            {
+                streak = -1;
+            }
+            adjustment += 10;
+            if (vampHand.total - playerHand.total <= 3)
+            {
+                //close victory
+                adjustment += 5;
+            }
 
+            if (streak < -2)
+            {
+                //winstreak
+                adjustment += 5;
+            }
+
+            adjustment += 5 * bet;
+        }   else if (roundResult == "tie")
+        {
+            streak = 0;
+            adjustment = 5;
+        }   else if (roundResult == "win")
+        {
+            if (streak > 0)
+            {
+                streak++;
+            }   else
+            {
+                streak = 1;
+            }
+            adjustment -= 5;
+            if (streak > 2)
+            {
+                adjustment -= 5;
+            }
+
+            if (bet == 5)
+            {
+                //crash and burn
+                adjustment = -50;
+            }
+        }
+
+        game.VampAdjustConfidence(adjustment);
+        vampSprite.SetInteger("confidence", game.vampConfidence);
     }
 }

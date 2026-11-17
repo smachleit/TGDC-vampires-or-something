@@ -28,7 +28,7 @@ public class GameManager : Singleton<GameManager>
     {
         playerHP = 25;
         vampHP = 25;
-        vampConfidence = 15;
+        vampConfidence = 60;
         playerHPStatus = 3;
         vampHPStatus = 3;
 

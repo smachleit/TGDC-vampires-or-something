@@ -15,6 +15,7 @@ public class DialogueManager : Singleton<DialogueManager>
     public int complimentsRemaining;
     private InputAction proceed;
     private WaitUntil waitForPlayer;
+    [SerializeField] Animator vampSprite;
 
     protected override void Awake()
     {
@@ -24,15 +25,31 @@ public class DialogueManager : Singleton<DialogueManager>
         waitForPlayer = new WaitUntil(proceed.WasPerformedThisFrame);
     }
 
-    void Start()
-    {
-        
-    }
-
     public IEnumerator WinPrompt(Action<int> response)
     {
-        yield return StartCoroutine(player.Prompt("win", response));
+        int reply = 0;
+        yield return StartCoroutine(player.Prompt("win", x =>
+        {
+            reply = x;
+        }));
+
+        if (reply == 1)
+        {
+            vampSprite.SetTrigger("heal");
+            StartCoroutine(vamp.PlayDialogueFromEvent("heal"));
+        }   else if (reply == 2)
+        {
+            vampSprite.SetTrigger("hurt");
+            StartCoroutine(vamp.PlayDialogueFromEvent("hurt"));
+        }
+
+        vamp.nextIndicator.SetActive(true);
+        yield return waitForPlayer;
+        vamp.nextIndicator.SetActive(false);
+
+        response(reply);
     }
+
 
     public IEnumerator RoundStart(int confidence)
     {
