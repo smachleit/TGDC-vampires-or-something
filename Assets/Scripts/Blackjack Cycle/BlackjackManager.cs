@@ -11,9 +11,6 @@ public class BlackjackManager : Singleton<BlackjackManager>
     public VampHand vampHand;
     Card vampStashedCard;
     int bet;
-=======
-    const int MAX_BET = 3;
->>>>>>> gamestate
     public Deck deck;
     
     bool playerTurn;
@@ -146,16 +143,11 @@ public class BlackjackManager : Singleton<BlackjackManager>
         GlassDisplay.Instance.Raise();
 
         // Temporary switch for blurring out raise button
-        bool tempSwitch;
-        if (bet == MAX_BET)
-            tempSwitch = true;
-=======
         if (bet == 3)
         {
             selectedOption = 1;
             PlayerActions.Instance.DeactivateRaise();
         }
->>>>>>> gamestate
     }
 
     public void VampireHit()
