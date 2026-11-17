@@ -24,7 +24,7 @@ public class Dialogue
     {
         if (!paths.ContainsKey(eventName))
         {
-            throw new KeyNotFoundException("Invalid event");
+            throw new KeyNotFoundException("Invalid event: " +eventName);
         }
 
         string[] allDialogue = paths[eventName];

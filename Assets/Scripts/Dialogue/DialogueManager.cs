@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Threading.Tasks;
+using NUnit.Framework.Interfaces;
 using Packages.Rider.Editor.UnitTesting;
 using Unity.Collections;
 using Unity.VisualScripting;
@@ -26,6 +27,11 @@ public class DialogueManager : Singleton<DialogueManager>
     void Start()
     {
         
+    }
+
+    public IEnumerator WinPrompt(Action<int> response)
+    {
+        yield return StartCoroutine(player.Prompt("win", response));
     }
 
     public IEnumerator RoundStart(int confidence)
@@ -60,31 +66,22 @@ public class DialogueManager : Singleton<DialogueManager>
         StartCoroutine(vamp.PlayDialogueFromEvent("startRound" + ConfidenceString(confidence)));
     }
 
-    public IEnumerator RoundEnd(int confidence, bool win, bool cheated)
+    public IEnumerator RoundEnd(int confidence, string result, bool cheated)
     {
-        if (win)
+        string eventName = result + "Round";
+        if (cheated)
         {
-            if (cheated)
-            {
-                yield return StartCoroutine(player.PlayDialogueFromEvent("winRoundCheated"));
-                StartCoroutine(vamp.PlayDialogueFromEvent("loseRoundCheated"));
-            }   else
-            {
-                yield return StartCoroutine(player.PlayDialogueFromEvent("winRound" + ConfidenceString(confidence)));
-                StartCoroutine(vamp.PlayDialogueFromEvent("loseRound" + ConfidenceString(confidence)));
-            }
+            eventName += "Cheated";
         }   else
         {
-            if (cheated)
-            {
-                yield return StartCoroutine(player.PlayDialogueFromEvent("loseRoundCheated"));
-                StartCoroutine(vamp.PlayDialogueFromEvent("winRoundCheated"));
-            }   else
-            {
-                yield return StartCoroutine(player.PlayDialogueFromEvent("loseRound" + ConfidenceString(confidence)));
-                StartCoroutine(vamp.PlayDialogueFromEvent("winRound" + ConfidenceString(confidence)));
-            }
+            eventName += ConfidenceString(confidence);
         }
+
+        yield return StartCoroutine(player.PlayDialogueFromEvent(eventName));
+        StartCoroutine(vamp.PlayDialogueFromEvent(eventName));
+        vamp.nextIndicator.SetActive(true);
+        yield return waitForPlayer;
+        vamp.nextIndicator.SetActive(false);
     }
 
     public IEnumerator HealthThresholdCrossed(int playerhp, int vamphp)

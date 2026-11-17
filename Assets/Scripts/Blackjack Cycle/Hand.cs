@@ -11,7 +11,6 @@ public abstract class Hand : MonoBehaviour
     public int size;
 
     public bool bust;
-    // public bool winR;
 
     protected void Awake()
     {
@@ -45,10 +44,19 @@ public abstract class Hand : MonoBehaviour
             aces--;
         }
         size++;
+
+        if (total > 21)
+        {
+            bust = true;
+        }
     }
 
     public virtual void ClearHand()
     {
         cards.Clear();
+        bust = false;
+        total = 0;
+        aces = 0;
+        size = 0;
     }
 }

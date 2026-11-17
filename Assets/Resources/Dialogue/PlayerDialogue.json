@@ -29,6 +29,18 @@
     "loseRoundUnconfident": [
         ""
     ],
+    "tieRoundConfident": [
+        ""
+    ],
+    "tieRoundCheated": [
+        ""
+    ],
+    "tieRoundNeutral": [
+        ""
+    ],
+    "tieRoundUnconfident": [
+        ""
+    ],
     "winRoundConfident": [
         ""
     ],

@@ -10,7 +10,6 @@ public class CardDisplay : MonoBehaviour
 
     public void Draw(Card card)
     {
-        Debug.Log(card.suite.ToString() + " " + card.rank.ToString());
         spriteResolver.SetCategoryAndLabel(card.suite.ToString(), card.rank.ToString());
         animator.SetTrigger("spawn");
     }

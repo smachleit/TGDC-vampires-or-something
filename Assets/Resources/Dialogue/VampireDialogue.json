@@ -20,6 +20,18 @@
     "loseRoundUnconfident": [
         ""
     ],
+    "tieRoundConfident": [
+        ""
+    ],
+    "tieRoundCheated": [
+        ""
+    ],
+    "tieRoundNeutral": [
+        ""
+    ],
+    "tieRoundUnconfident": [
+        ""
+    ],
     "winRoundConfident": [
         ""
     ],
@@ -50,6 +62,6 @@
         "Hell yeah bro"
     ],
     "rejectCompliment": [
-        ""
+        "Dude I'm not gay"
     ]
 }

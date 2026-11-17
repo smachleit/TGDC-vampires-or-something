@@ -22,7 +22,6 @@ public class Deck : MonoBehaviour
 
     public void Shuffle()
     {
-        Debug.Log(allCards);
         List<int> copy = new(allCards);
         deckState.Clear();
 

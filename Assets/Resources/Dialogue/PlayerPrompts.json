@@ -19,5 +19,27 @@
             "You try to think of something nice to say, but nothing comes to mind",
             "I'm not gonna be the substitute for a loving father"
         ]
+    },
+
+    "win": {
+        "prompt": [
+            "How much blood have I lost?",
+            "Maybe I could use a blessing",
+            "Looks refreshing"
+        ],
+        "options": [
+            "Heal Self",
+            "Damage Kyle"
+        ],
+        "reply1": [
+            "Down the hatch. \n \n (Regained some hp)",
+            "Who knew holy water tastes like gatorade \n \n (Regained some hp)",
+            "I prefer whiskey \n \n (Regained some hp)"
+        ],
+        "reply2": [
+            "I hate vampires.",
+            "This guy could use a bit more of the lord in his life.",
+            "Eat holy water asshole"
+        ]
     }
 }

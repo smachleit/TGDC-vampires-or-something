@@ -5,9 +5,11 @@ public class VampHand : Hand
 {
     public VampCardDisplay[] cardDisplays;
     public Animator animator;
+    public WaitForSeconds waitSecond;
 
     void Start()
     {
+        waitSecond = new(1);
         for (int i = 0; i < 5; i++)
         {
             cardDisplays[i].SetIndex(i);
@@ -31,7 +33,8 @@ public class VampHand : Hand
         {
             cardDisplays[i].Clear();
         }
-        animator.SetTrigger("turnEnd");
+
+        StartCoroutine(resetDelay());
         base.ClearHand();
     }
 
@@ -39,8 +42,14 @@ public class VampHand : Hand
     {
         animator.SetTrigger("turnStart");
 
-        yield return new WaitForSeconds(1);
+        yield return waitSecond;
 
         cardDisplays[1].RevealHoleCard();
+    }
+
+    private IEnumerator resetDelay()
+    {
+        yield return waitSecond;
+        animator.SetTrigger("turnEnd");
     }
 }

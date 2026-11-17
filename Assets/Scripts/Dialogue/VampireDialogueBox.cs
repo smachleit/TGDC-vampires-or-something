@@ -20,7 +20,7 @@ public class VampireDialogueBox : DialogueBox
     {
         string newMessage = dialogue.GetDialogueFromEvent(eventName);
 
-        if (newMessage == null)
+        if (newMessage == null || newMessage == "")
         {
             UpdateText(". . .");
         }   else

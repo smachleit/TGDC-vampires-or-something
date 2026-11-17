@@ -28,7 +28,7 @@ public class GameManager : Singleton<GameManager>
     {
         playerHP = 25;
         vampHP = 25;
-        vampConfidence = 60;
+        vampConfidence = 15;
         playerHPStatus = 3;
         vampHPStatus = 3;
 
@@ -48,11 +48,24 @@ public class GameManager : Singleton<GameManager>
         if (playerHP <= 0)
             StartCoroutine(GameOver("PlayerDeath"));
         
-        playerHPBar.fillAmount = playerHP / 25;
+        playerHPBar.fillAmount = (float)playerHP / 25;
+    }
+
+    public void HealPlayerHP(int gain)
+    {
+        playerHP += gain;
+
+        if (playerHP > 25)
+        {
+            playerHP = 25;
+        }
+
+        playerHPBar.fillAmount = (float)playerHP / 25;
     }
 
     public void LoseVampHP(int vampLoss) 
     {
+        Debug.Log("Losing " + vampLoss + " hp");
         vampHP -= vampLoss;
 
         if (vampHP < healthThresholds[vampHPStatus - 1])
@@ -64,7 +77,9 @@ public class GameManager : Singleton<GameManager>
         if (vampHP <= 0)
             StartCoroutine(GameOver("VampireDeath"));
 
-        vampHPBar.fillAmount = vampHP / 25;
+        Debug.Log(vampHP);
+        Debug.Log((float)vampHP / 25);
+        vampHPBar.fillAmount = (float)vampHP / 25;
     }
 
     public void VampAdjustConfidence(int change)

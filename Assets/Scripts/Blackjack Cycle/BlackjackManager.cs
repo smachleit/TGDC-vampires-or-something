@@ -17,7 +17,7 @@ public class BlackjackManager : Singleton<BlackjackManager>
     bool playerTurn;
     bool playerBlackjack;
     bool vampBlackjack;
-    bool playerWinR;
+    string roundResult;
 
     DialogueManager dialogue;
     GameManager game;
@@ -29,6 +29,7 @@ public class BlackjackManager : Singleton<BlackjackManager>
     bool listenEnter;
     int selectedOption;
 
+    private readonly WaitForSeconds pause = new(1.5f);
     override protected void Awake()
     {
         base.Awake();
@@ -57,11 +58,6 @@ public class BlackjackManager : Singleton<BlackjackManager>
         playerTurn = true;
         selectedOption = -1;
         deck.Shuffle();
-        playerHand.bust = false;
-        vampHand.bust = false;
-        playerWinR = false;
-        bet = 0;
-        WaitForSeconds pause = new(2.5f);
 
         // Both players draw two cards
         PlayerHit();
@@ -71,41 +67,73 @@ public class BlackjackManager : Singleton<BlackjackManager>
         PlayerHit();
         yield return pause;
         VampireHit();
+        yield return pause;
 
+        // run dialogue
         yield return StartCoroutine(dialogue.RoundStart(game.vampConfidence));
 
+        // free player action
         selectedOption = 1;
         listenEnter = true;
         listenMove = true;
         PlayerActions.Instance.ActivateActions();
+        if (bet == 3)
+        {
+            PlayerActions.Instance.DeactivateRaise();
+        }
 
         // END PLAYER PHASE
         yield return new WaitUntil(() => !playerTurn);
-        move.Disable();
-        enter.Enable();
         PlayerActions.Instance.DeactivateActions();
 
+        // vampire turn
         StartCoroutine(PlayVampire());
     }
 
-    public void EndRound()
+    public IEnumerator EndRound()
     {
-        if (!playerHand.bust && !vampHand.bust)
-        {
-            if (playerHand.total > vampHand.total)
-                playerWinR = true;
-            else
-                playerWinR = false;
-        }
-        else if (playerHand.bust)
-            playerWinR = false;
-        else
-            playerWinR = true;
+        listenEnter = false;
+        listenMove = false;
 
-        if (playerWinR)
+        Debug.Log("PlayerHand: " + playerHand.total + " Vampire Hand: " + vampHand.total);
+        roundResult = DetermineWinner();
+        Debug.Log(roundResult);
+
+        //let everything finish first
+        yield return pause;
+        vampHand.ClearHand();
+        playerHand.ClearHand();
+
+        //fill shot glasses
+        if (roundResult == "win")
+        {
+            GlassDisplay.Instance.Fill(true);
+            yield return StartCoroutine(dialogue.WinPrompt(x =>
+            {
+                if (x == 1)
+                {
+                    game.HealPlayerHP(bet);
+                }   else if (x == 2)
+                {
+                    game.LoseVampHP(bet);
+                }
+            }));
+            yield return StartCoroutine(dialogue.RoundEnd(game.vampConfidence, roundResult, false));
+            GlassDisplay.Instance.Clear();
+            bet = 0;
+        }   else if (roundResult == "tie")
+        {
+            yield return StartCoroutine(dialogue.RoundEnd(game.vampConfidence, roundResult, false));
+        }   else if (roundResult == "lose")
+        {
+            GlassDisplay.Instance.Fill(false);
+            yield return StartCoroutine(dialogue.RoundEnd(game.vampConfidence, roundResult, false));
+            GlassDisplay.Instance.Clear();
             game.LosePlayerHP(bet);
-        else
-            game.LoseVampHP(bet);
+            bet = 0;
+        }
+
+        StartCoroutine(StartRound());
     }
 
     public void PlayerHit()
@@ -118,9 +146,8 @@ public class BlackjackManager : Singleton<BlackjackManager>
 
     public void CheckBust(Hand h)
     {
-        if (h.total > 21)
+        if (h.bust)
         {
-            h.bust = true;
             playerTurn = false;
         }   else if (h.total == 21)
         {
@@ -142,7 +169,7 @@ public class BlackjackManager : Singleton<BlackjackManager>
         GlassDisplay.Instance.Raise();
 
         // Temporary switch for blurring out raise button
-        if (bet == 3)
+        if (bet == MAX_BET)
         {
             selectedOption = 1;
             PlayerActions.Instance.DeactivateRaise();
@@ -153,8 +180,6 @@ public class BlackjackManager : Singleton<BlackjackManager>
     {
         Card card = deck.Draw();
         vampHand.AddCard(card);
-
-        // CheckBust(vampHand);
     }
 
     public IEnumerator PlayVampire()
@@ -164,22 +189,23 @@ public class BlackjackManager : Singleton<BlackjackManager>
 
         if (playerHand.bust || vampHand.total > playerHand.total)
         {
-            EndRound();
+            StartCoroutine(EndRound());
+            yield break;
         }
 
         while (vampHand.total < 17 || (vampHand.total < playerHand.total && !playerHand.bust))
         {
             VampireHit();
 
-            yield return new WaitForSeconds(1);
+            yield return pause;
 
-            if (playerHand.bust || vampHand.cards.Count == 5) 
+            if (vampHand.cards.Count == 5 || vampHand.bust)
             {
-                EndRound();
+                break;
             }
         }
 
-        EndRound();
+        StartCoroutine(EndRound());
     }
 
     private void MoveCursor(InputAction.CallbackContext context)
@@ -200,8 +226,6 @@ public class BlackjackManager : Singleton<BlackjackManager>
         }
 
         PlayerActions.Instance.UpdateCurrentAction(selectedOption);
-
-        // Debug.Log("Cursor moved: " + selectedOption);
     }
 
     private void SelectAction()
@@ -224,5 +248,39 @@ public class BlackjackManager : Singleton<BlackjackManager>
                 break;
             
         }
+    }
+
+    private string DetermineWinner()
+    {
+        //first check for bust
+        if (playerHand.bust && vampHand.bust)
+        {
+            return "tie";
+        }   else if (playerHand.bust)
+        {
+            return "lose";
+        }   else if (vampHand.bust)
+        {
+            return "win";
+        }
+
+        //compare hands
+        if (playerHand.total > vampHand.total)
+        {
+            return "win";
+        }   else if (playerHand.total == vampHand.total)
+        {
+            return "tie";
+        }   else if (playerHand.total < vampHand.total)
+        {
+            return "lose";
+        }
+
+        // this shouldnt happen
+        return "tie";
+    }
+
+    private void CalculateConfidence () {
+
     }
 }
