@@ -2,14 +2,21 @@ using UnityEngine;
 
 public class PlayerHand : Hand
 {
+    public CardDisplay[] cardDisplays;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Awake()
+    public override void AddCard(Card card)
     {
+        cardDisplays[size].Draw(card);
+        base.AddCard(card);
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void ClearHand()
     {
-        
+        for (int i = 0; i < cards.Count; i++)
+        {
+            cardDisplays[i].Clear();
+        }
+        base.ClearHand();
     }
 }

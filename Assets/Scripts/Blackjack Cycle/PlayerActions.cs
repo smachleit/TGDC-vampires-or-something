@@ -34,10 +34,17 @@ public class PlayerActions : Singleton<PlayerActions>
 
     public void ActivateActions()
     {
+        selected = 1;
         foreach (SpriteResolver button in buttons)
         {
             button.SetCategoryAndLabel(button.GetCategory(), "active");
         }
         buttons[1].SetCategoryAndLabel("HIT", "selected");
+    }
+
+    public void DeactivateRaise()
+    {
+        UpdateCurrentAction(1);
+        buttons[0].SetCategoryAndLabel("RAISE", "inactive");
     }
 }

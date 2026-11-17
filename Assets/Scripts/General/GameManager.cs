@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
@@ -7,24 +8,31 @@ public class GameManager : Singleton<GameManager>
     public int vampHP {get; private set; }
     public int vampConfidence {get; private set; }
     DialogueManager dialogue;
+    BlackjackManager blackjack;
 
     // For tracking when either HP drops below certain thresholds to trigger events
     public int[] healthThresholds = {8, 13, 19};
     public int playerHPStatus;
     public int vampHPStatus;
 
+    [SerializeField] private Image playerHPBar;
+    [SerializeField] private Image vampHPBar;
+
     void Start()
     {
         dialogue = DialogueManager.Instance;
+        blackjack = BlackjackManager.Instance;
     }
 
     public void GameStart()
     {
         playerHP = 25;
         vampHP = 25;
-        vampConfidence = 70;
+        vampConfidence = 60;
         playerHPStatus = 3;
         vampHPStatus = 3;
+
+        StartCoroutine(blackjack.StartRound());
     }
 
     public void LosePlayerHP(int playerLoss)
@@ -39,6 +47,8 @@ public class GameManager : Singleton<GameManager>
         
         if (playerHP <= 0)
             StartCoroutine(GameOver("PlayerDeath"));
+        
+        playerHPBar.fillAmount = playerHP / 25;
     }
 
     public void LoseVampHP(int vampLoss) 
@@ -53,6 +63,8 @@ public class GameManager : Singleton<GameManager>
 
         if (vampHP <= 0)
             StartCoroutine(GameOver("VampireDeath"));
+
+        vampHPBar.fillAmount = vampHP / 25;
     }
 
     public void VampAdjustConfidence(int change)
