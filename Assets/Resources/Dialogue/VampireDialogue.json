@@ -1,24 +1,39 @@
 {
     "startRoundConfident": [
-        ""
+        "You know, you can just forfeit now to spare yourself the humiliation!",
+        "Please, try your best, even if you know you're going to loose!",
+        "I don't even need to look at my cards to know I've already won!"
     ],
     "startRoundNeutral": [
-        ""
+        "Are you ready to loose?", 
+        "I bet you don't even have a degree!", 
+        "Only a true genius like me could win at a game like this!", 
+        "I bet you don't even own an air fryer."
     ],
     "startRoundUnconfident": [
-        ". . ."
+        ". . .",
+        "It's fine, I can always make a comeback...", 
+        "Am I... losing?"
     ],
     "loseRoundConfident": [
-        ""
+        "Hmph, so you actually do know how to play?",
+        "Hah! What a fluke! I'll be sure to take back the next round!",
+        "Wow, you're so good- Is what I would say if I was lying!" 
     ],
     "loseRoundCheated": [
-        ""
+        "What? But I-",
+        "That's impossible! How did you..?",
+        "You little... you're so lucky I made a deal with you." 
     ],
     "loseRoundNeutral": [
-        ""
+        "Let's see if you can do that again.",
+        "One loss doesn't mean anything, you're barely a threat.", 
+        "Dumb luck, you won't be able to repeat a win like that two times in a row!" 
     ],
     "loseRoundUnconfident": [
-        ""
+        "Of course... I guess I'm on a losing streak.",
+        "I can do better- I don't usually do this bad...",
+        "You don't need to kick me when I'm down." 
     ],
     "tieRoundConfident": [
         ""
@@ -33,36 +48,55 @@
         ""
     ],
     "winRoundConfident": [
-        ""
+        "Aw, are you going to cry? Or are your eyes sparkling with admiration?",
+        "Hah! All the dude's back at the frat are going to love this!",
+        "And genius like that is why I'm the top of my class at Brown!" 
     ],
     "winRoundNeutral": [
-        ""
+        "As I thought, you really aren't anything special!",
+        "I really expected better of you.",
+        "You can just give up now and make this quicker for all of us." 
+        
     ],
     "winRoundUnconfident": [
-        ""
+        "I.. I actually won?",
+        "Maybe you really were just getting lucky!",
+        "I- I can still win this? Yeah- I can still win this!" 
     ],
     "caughtCheating": [
-        ""
+        "Don't act like you wouldn't do the same!",
+        "What? ME? Cheating?! I would never! That's crazy!",
+        "Whatever, everyone's cheated before! You've probably cheated before!" 
     ],
     "healthThreeFourths": [
-        "grr im so angry",
-        "im gonna steal all the kings"
+        "Clearly, you've somehow rigged this game, because I should totally be winning.",
+        "Well if you won't admit it, I guess I'll remove all the Kings to make things harder."
     ],
     "healthOneHalf": [
-        ""
+        "Whatever, I'm not even phased.",
+        "I've dealt with worse, this is nothing to me!", 
+        "I could still win this easily, I'm not even paying attention." 
     ],
     "healthOneFourth": [
-        ""
+        "I- I guess I actually have to start trying now.",
+        "I'm clearly more skilled than you! You just have dumb luck!",
+        "I bet you slipped something into the cards, that's why I'm loosing!"
     ],
     "ragequit": [
-        ""
+        "You know what? I'm done, that's it!",
+        "I don't care anymore, you've been cheating and- and lying this entire time!",
+        "You probably don't even care about playing fair! You just wanted to humiliate me!", 
+        "Well, you got what you wanted! Good job on ruining everything!"
     ],
     "recieveCompliment": [
         "See you get me!",
-        "Hell yeah bro"
+        "Finally, someone acknowledges my talent!",
+        "Yeah, I know, I'm amazing." 
     ],
     "rejectCompliment": [
-        "Dude I'm not gay"
+        "Are you trying to make fun of me!?",
+        "Oh shut up! Tell that to someone who cares!",
+        "Whatever, you probably don't even mean it."
     ],
     "heal": [
         "I knew you were too scared to do it!",
