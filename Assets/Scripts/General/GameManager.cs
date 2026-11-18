@@ -1,5 +1,8 @@
 using System.Collections;
+using UnityEngine.UI;
 using UnityEngine;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -7,50 +10,95 @@ public class GameManager : Singleton<GameManager>
     public int vampHP {get; private set; }
     public int vampConfidence {get; private set; }
     DialogueManager dialogue;
+    BlackjackManager blackjack;
 
     // For tracking when either HP drops below certain thresholds to trigger events
-    public int[] healthThresholds = {8, 13, 19};
+    public int[] healthThresholds = {0, 8, 13, 19};
     public int playerHPStatus;
     public int vampHPStatus;
+
+    [SerializeField] private Image playerHPBar;
+    [SerializeField] private Image vampHPBar;
 
     void Start()
     {
         dialogue = DialogueManager.Instance;
+        blackjack = BlackjackManager.Instance;
+        GameStart();
     }
 
     public void GameStart()
     {
         playerHP = 25;
         vampHP = 25;
-        vampConfidence = 70;
+        vampConfidence = 60;
         playerHPStatus = 3;
         vampHPStatus = 3;
+
+        StartCoroutine(blackjack.StartRound());
     }
 
-    public void LoseHP(int playerLoss, int vampLoss)
+    public void LosePlayerHP(int playerLoss)
     {
         playerHP -= playerLoss;
-        vampHP -= vampLoss;
 
-        if (playerHP < healthThresholds[playerHPStatus - 1])
+        if (playerHP < healthThresholds[playerHPStatus])
         {
             StartCoroutine(dialogue.HealthThresholdCrossed(playerHPStatus, -1));
             playerHPStatus--;
         }
+        
+        if (playerHP <= 0)
+            StartCoroutine(GameOver("PlayerDeath"));
+        
+        playerHPBar.fillAmount = (float)playerHP / 25;
+    }
 
-        if (vampHP < healthThresholds[vampHPStatus - 1])
+    public void HealPlayerHP(int gain)
+    {
+        playerHP += gain;
+
+        if (playerHP > 25)
+        {
+            playerHP = 25;
+        }
+
+        playerHPBar.fillAmount = (float)playerHP / 25;
+    }
+
+    public void LoseVampHP(int vampLoss) 
+    {
+        Debug.Log("Losing " + vampLoss + " hp");
+        vampHP -= vampLoss;
+
+        if (vampHP < healthThresholds[vampHPStatus])
         {
             StartCoroutine(dialogue.HealthThresholdCrossed(-1, vampHPStatus));
+            switch (vampHPStatus)
+            {
+                case 3:
+                    List<Card> kings = new();
+                    for (int i = 1; i <= 4; i++)
+                    {
+                        kings.Add(new Card((i * 13) - 1));
+                    }
+                    blackjack.deck.RemoveFromDeck(kings);
+                    break;
+                case 2:
+                    // NO EVENT YET, MIGHT DO ONE LATER
+                    break;
+                case 1:
+                    break;
+            }
             vampHPStatus--;
         }
 
-        if (playerHP <= 0)
-        {
-            StartCoroutine(GameOver("PlayerDeath"));
-        }   else if (vampHP <= 0)
-        {
+        if (vampHP <= 0)
             StartCoroutine(GameOver("VampireDeath"));
-        }
+
+        Debug.Log(vampHP);
+        Debug.Log((float)vampHP / 25);
+        vampHPBar.fillAmount = (float)vampHP / 25;
     }
 
     public void VampAdjustConfidence(int change)

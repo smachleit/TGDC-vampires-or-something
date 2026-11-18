@@ -7,6 +7,7 @@ public class VampireDialogueBox : DialogueBox
     private InputAction proceed;
     private WaitUntil waitForPlayer;
     public GameObject nextIndicator;
+    [SerializeField]private Animator vampSprite;
 
     protected override void Awake()
     {
@@ -19,8 +20,9 @@ public class VampireDialogueBox : DialogueBox
     public override IEnumerator PlayDialogueFromEvent(string eventName)
     {
         string newMessage = dialogue.GetDialogueFromEvent(eventName);
+        vampSprite.SetBool("talking", true);
 
-        if (newMessage == null)
+        if (newMessage == null || newMessage == "")
         {
             UpdateText(". . .");
         }   else
@@ -32,6 +34,7 @@ public class VampireDialogueBox : DialogueBox
 
         // wait a bit for player to read
         yield return new WaitForSeconds(0.5f);
+        vampSprite.SetBool("talking", false);
     }
 
     // For when we want to print multiple lines in succession
@@ -42,8 +45,10 @@ public class VampireDialogueBox : DialogueBox
         foreach (string message in sequence)
         {
             UpdateText(message);
+            vampSprite.SetBool("talking", true);
 
             yield return new WaitUntil(() => _textFullyLoaded);
+            vampSprite.SetBool("talking", false);
 
             nextIndicator.SetActive(true);
             yield return waitForPlayer;

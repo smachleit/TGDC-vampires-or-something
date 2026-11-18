@@ -1,10 +1,8 @@
 using System;
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Scripting.APIUpdating;
 
 public class PlayerDialogueBox : DialogueBox
 {
@@ -37,8 +35,8 @@ public class PlayerDialogueBox : DialogueBox
         base.Start();
         move = InputSystem.actions.FindAction("NavigateHorizontal");
         enter = InputSystem.actions.FindAction("Enter");
-        move.performed += context => MoveCursor(context);
-        enter.performed += context => SubmitResponse();
+        move.performed += MoveCursor;
+        enter.performed += SubmitResponse;
         selectedOption = 1;
         prompts.LoadDialogue(promptsSource);
     }
@@ -87,6 +85,7 @@ public class PlayerDialogueBox : DialogueBox
 
     public IEnumerator Prompt(string promptName, System.Action<int> response)
     {
+        submit = false;
         // Play prompt text
         yield return StartCoroutine(PlayDialogueFromPrompt(promptName, "prompt"));
         // Wait until done to display options
@@ -94,8 +93,8 @@ public class PlayerDialogueBox : DialogueBox
         opt1.text = prompts.GetOption1(promptName);
         opt2.text = prompts.GetOption2(promptName);
         
-        move.Enable();
-        enter.Enable();
+        // move.Enable();
+        // enter.Enable();
         
         yield return new WaitUntil(() => submit);
 
@@ -123,10 +122,10 @@ public class PlayerDialogueBox : DialogueBox
         }
     }
 
-    private void SubmitResponse()
+    private void SubmitResponse(InputAction.CallbackContext context)
     {
-        move.Disable();
-        enter.Disable();
+        // move.Disable();
+        // enter.Disable();
 
         submit = true;
     }

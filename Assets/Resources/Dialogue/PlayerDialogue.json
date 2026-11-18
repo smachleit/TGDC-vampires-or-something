@@ -14,7 +14,7 @@
         "He's acting as if he doesn't care.",
         "Can't stand this guy.", 
         "Smells like condescension.", 
-        "He's talking to an 'associate' on his phone. The phone is off." 
+        "He's talking to an 'associate' on his phone. The phone is off.", 
         "You can see him messaging someone under the table about how he's 'mogging' you. Whatever that means." 
     ],
     "loseRoundConfident": [
@@ -36,6 +36,18 @@
         "Maybe with a win he won't whine so much",
         "At least that'll stop him from throwing a tantrum...",
         "He's looking at me with such a pathetic expression, even though he won.."    
+    ],
+    "tieRoundConfident": [
+        ""
+    ],
+    "tieRoundCheated": [
+        ""
+    ],
+    "tieRoundNeutral": [
+        ""
+    ],
+    "tieRoundUnconfident": [
+        ""
     ],
     "winRoundConfident": [
         "Maybe that'll teach him to not talk so much.",
@@ -74,8 +86,8 @@
     ],
     "healthOneFourth": [
         "I can't tell if he's actually skilled or just stupidly lucky...",
-        "How the hell did he get this much blood out of me...?" 
-        "Everyone loves an underdog... I can win this if I focus." 
+        "How the hell did he get this much blood out of me...?",
+        "Everyone loves an underdog... I can win this if I focus."
     ],
     "ragequit": [
         "He seriously gave up...?",
