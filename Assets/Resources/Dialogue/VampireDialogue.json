@@ -5,7 +5,7 @@
         "I don't even need to look at my cards to know I've already won!"
     ],
     "startRoundNeutral": [
-        "Are you ready to loose?", 
+        "Are you ready to lose?", 
         "I bet you don't even have a degree!", 
         "Only a true genius like me could win at a game like this!", 
         "I bet you don't even own an air fryer."
@@ -15,50 +15,57 @@
         "It's fine, I can always make a comeback...", 
         "Am I... losing?"
     ],
-    "loseRoundConfident": [
+    "winRoundConfident": [
         "Hmph, so you actually do know how to play?",
         "Hah! What a fluke! I'll be sure to take back the next round!",
         "Wow, you're so good- Is what I would say if I was lying!" 
     ],
-    "loseRoundCheated": [
+    "winRoundCheated": [
         "What? But I-",
         "That's impossible! How did you..?",
         "You little... you're so lucky I made a deal with you." 
     ],
-    "loseRoundNeutral": [
+    "winRoundNeutral": [
         "Let's see if you can do that again.",
         "One loss doesn't mean anything, you're barely a threat.", 
         "Dumb luck, you won't be able to repeat a win like that two times in a row!" 
     ],
-    "loseRoundUnconfident": [
+    "winRoundUnconfident": [
         "Of course... I guess I'm on a losing streak.",
         "I can do better- I don't usually do this bad...",
         "You don't need to kick me when I'm down." 
     ],
     "tieRoundConfident": [
-        ""
+        "Wow! You really just can't win a round can you? Can you do anything besides pour drinks?",
+        "So close yet really, really far. Keep trying though, maybe you won't suck so bad next round!",
+        "Awww, did you get excited for a moment?"
     ],
     "tieRoundCheated": [
-        ""
+        "How did that not work?",
+        "You uh, you didn't see that right.",
+        "I should be winning, how is this possible?"
     ],
     "tieRoundNeutral": [
-        ""
+        "How boring.",
+        "Well where's the fun in that.",
+        "This game sucks."
     ],
     "tieRoundUnconfident": [
-        ""
+        "At least it's not another loss",
+        "Finally, no more holy water!",
+        "...whatever"
     ],
-    "winRoundConfident": [
+    "loseRoundConfident": [
         "Aw, are you going to cry? Or are your eyes sparkling with admiration?",
         "Hah! All the dude's back at the frat are going to love this!",
         "And genius like that is why I'm the top of my class at Brown!" 
     ],
-    "winRoundNeutral": [
+    "loseRoundNeutral": [
         "As I thought, you really aren't anything special!",
         "I really expected better of you.",
         "You can just give up now and make this quicker for all of us." 
-        
     ],
-    "winRoundUnconfident": [
+    "loseRoundUnconfident": [
         "I.. I actually won?",
         "Maybe you really were just getting lucky!",
         "I- I can still win this? Yeah- I can still win this!" 
@@ -101,11 +108,11 @@
     "heal": [
         "I knew you were too scared to do it!",
         "Hah! Loser needs to heal.",
-        "Noooooooo, don't drink that I wanted itttttt"
+        "Noooooooo, don't drink that I wanted it! Totally!"
     ],
     "hurt": [
-        "Dudeeeeeeee. Your bar needs to get better drinks",
-        "My dad is so gonna hear about this. Once he finally picks up my calls",
-        "Whatever. It's not even that strong anyways"
+        "Dude. Your bar needs to get better drinks.",
+        "My dad is so gonna hear about this. Once he finally picks up my calls.",
+        "Whatever. It's not even that strong anyways."
     ]
 }

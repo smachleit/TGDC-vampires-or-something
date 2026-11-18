@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -11,7 +13,7 @@ public class GameManager : Singleton<GameManager>
     BlackjackManager blackjack;
 
     // For tracking when either HP drops below certain thresholds to trigger events
-    public int[] healthThresholds = {8, 13, 19};
+    public int[] healthThresholds = {0, 8, 13, 19};
     public int playerHPStatus;
     public int vampHPStatus;
 
@@ -22,6 +24,7 @@ public class GameManager : Singleton<GameManager>
     {
         dialogue = DialogueManager.Instance;
         blackjack = BlackjackManager.Instance;
+        GameStart();
     }
 
     public void GameStart()
@@ -39,7 +42,7 @@ public class GameManager : Singleton<GameManager>
     {
         playerHP -= playerLoss;
 
-        if (playerHP < healthThresholds[playerHPStatus - 1])
+        if (playerHP < healthThresholds[playerHPStatus])
         {
             StartCoroutine(dialogue.HealthThresholdCrossed(playerHPStatus, -1));
             playerHPStatus--;
@@ -68,9 +71,25 @@ public class GameManager : Singleton<GameManager>
         Debug.Log("Losing " + vampLoss + " hp");
         vampHP -= vampLoss;
 
-        if (vampHP < healthThresholds[vampHPStatus - 1])
+        if (vampHP < healthThresholds[vampHPStatus])
         {
             StartCoroutine(dialogue.HealthThresholdCrossed(-1, vampHPStatus));
+            switch (vampHPStatus)
+            {
+                case 3:
+                    List<Card> kings = new();
+                    for (int i = 1; i <= 4; i++)
+                    {
+                        kings.Add(new Card((i * 13) - 1));
+                    }
+                    blackjack.deck.RemoveFromDeck(kings);
+                    break;
+                case 2:
+                    // NO EVENT YET, MIGHT DO ONE LATER
+                    break;
+                case 1:
+                    break;
+            }
             vampHPStatus--;
         }
 

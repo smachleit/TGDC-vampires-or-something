@@ -1,7 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -49,11 +46,6 @@ public class BlackjackManager : Singleton<BlackjackManager>
 
         listenEnter = false;
         listenMove = false;
-    }
-
-    public void test()
-    {
-        StartCoroutine(StartRound());
     }
 
     public IEnumerator StartRound()
@@ -124,6 +116,7 @@ public class BlackjackManager : Singleton<BlackjackManager>
             GlassDisplay.Instance.Fill(true);
             yield return StartCoroutine(dialogue.WinPrompt(x =>
             {
+                GlassDisplay.Instance.Clear();
                 if (x == 1)
                 {
                     game.HealPlayerHP(bet);
@@ -134,17 +127,16 @@ public class BlackjackManager : Singleton<BlackjackManager>
                 }
             }));
             yield return StartCoroutine(dialogue.RoundEnd(game.vampConfidence, roundResult, false));
-            GlassDisplay.Instance.Clear();
             bet = 0;
         }   else if (roundResult == "tie")
         {
             yield return StartCoroutine(dialogue.RoundEnd(game.vampConfidence, roundResult, false));
         }   else if (roundResult == "lose")
         {
-            vampSprite.SetTrigger("win");
             GlassDisplay.Instance.Fill(false);
             yield return StartCoroutine(dialogue.RoundEnd(game.vampConfidence, roundResult, false));
             GlassDisplay.Instance.Clear();
+            vampSprite.SetTrigger("win");
             game.LosePlayerHP(bet);
             bet = 0;
         }
@@ -231,7 +223,7 @@ public class BlackjackManager : Singleton<BlackjackManager>
             return;
         }
         float cursor = context.ReadValue<float>();
-        int disableRaise = (bet == MAX_BET) ? 1 : 0;
+        int disableRaise = (bet >= MAX_BET) ? 1 : 0;
 
         if (cursor > 0 && selectedOption > disableRaise)
         {
@@ -339,6 +331,8 @@ public class BlackjackManager : Singleton<BlackjackManager>
             {
                 adjustment -= 5;
             }
+
+            adjustment -= 5 * bet;
 
             if (bet == 5)
             {

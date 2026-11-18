@@ -1,10 +1,5 @@
 using System;
 using System.Collections;
-using System.Threading.Tasks;
-using NUnit.Framework.Interfaces;
-using Packages.Rider.Editor.UnitTesting;
-using Unity.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -68,6 +63,7 @@ public class DialogueManager : Singleton<DialogueManager>
                         complimentsRemaining--;
                         //TODO: add to his confidence
                         StartCoroutine(vamp.PlayDialogueFromEvent("recieveCompliment"));
+                        GameManager.Instance.VampAdjustConfidence(20);
                     }   else
                     {
                         StartCoroutine(vamp.PlayDialogueFromEvent("rejectCompliment"));
