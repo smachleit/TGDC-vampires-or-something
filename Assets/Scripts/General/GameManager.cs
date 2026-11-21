@@ -19,12 +19,14 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField] private Image playerHPBar;
     [SerializeField] private Image vampHPBar;
+    [SerializeField] private Animator lowHealthIndicator;
 
     void Start()
     {
         dialogue = DialogueManager.Instance;
         blackjack = BlackjackManager.Instance;
         GameStart();
+        Debug.Log(healthThresholds[0]);
     }
 
     public void GameStart()
@@ -42,15 +44,18 @@ public class GameManager : Singleton<GameManager>
     {
         playerHP -= playerLoss;
 
-        if (playerHP < healthThresholds[playerHPStatus])
+        if (playerHP <= 0)
+        {
+            GameOver();
+        }   else if (playerHP < healthThresholds[playerHPStatus])
         {
             StartCoroutine(dialogue.HealthThresholdCrossed(playerHPStatus, -1));
+            lowHealthIndicator.SetTrigger("flash");
             playerHPStatus--;
         }
         
-        if (playerHP <= 0)
-            StartCoroutine(GameOver("PlayerDeath"));
-        
+        lowHealthIndicator.SetInteger("health", playerHP);
+
         playerHPBar.fillAmount = (float)playerHP / 25;
     }
 
@@ -62,6 +67,8 @@ public class GameManager : Singleton<GameManager>
         {
             playerHP = 25;
         }
+
+        lowHealthIndicator.SetInteger("health", playerHP);
 
         playerHPBar.fillAmount = (float)playerHP / 25;
     }
@@ -94,10 +101,8 @@ public class GameManager : Singleton<GameManager>
         }
 
         if (vampHP <= 0)
-            StartCoroutine(GameOver("VampireDeath"));
+            VampireDeath();
 
-        Debug.Log(vampHP);
-        Debug.Log((float)vampHP / 25);
         vampHPBar.fillAmount = (float)vampHP / 25;
     }
 
@@ -107,17 +112,16 @@ public class GameManager : Singleton<GameManager>
 
         if (vampConfidence <= 0)
         {
-            StartCoroutine(GameOver("Ragequit"));
+            GameOver();
         }   else if (vampConfidence > 100)
         {
             vampConfidence = 100;
         }
     }
 
-    public IEnumerator GameOver(string ending)
+    public void GameOver()
     {
-        //placeholder
-        yield return new WaitForEndOfFrame();
+        lowHealthIndicator.SetTrigger("death");
     }
 
     public IEnumerator PlayerDeath()
@@ -132,9 +136,9 @@ public class GameManager : Singleton<GameManager>
         yield return new WaitForEndOfFrame();
     }
 
-    public IEnumerator VampireDeath()
+    public void VampireDeath()
     {
         //placeholder
-        yield return new WaitForEndOfFrame();
+        lowHealthIndicator.SetTrigger("win");
     }
 }

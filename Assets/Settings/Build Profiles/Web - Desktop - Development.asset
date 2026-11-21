@@ -21,8 +21,20 @@ MonoBehaviour:
   m_OverrideGlobalSceneList: 1
   m_Scenes:
   - m_enabled: 1
+    m_path: Assets/Scenes/Menu.unity
+    m_guid: 9f15f5770cf9c44519773ef5ba5f0200
+  - m_enabled: 1
     m_path: Assets/Scenes/Main.unity
     m_guid: 8c9cfa26abfee488c85f1582747f6a02
+  - m_enabled: 1
+    m_path: Assets/Scenes/GameOver/Death.unity
+    m_guid: 130b39495a6f64219845c4aabcbe04a5
+  - m_enabled: 1
+    m_path: Assets/Scenes/GameOver/Ragequit.unity
+    m_guid: dde5c2c6d217748f39e70af4a4806467
+  - m_enabled: 1
+    m_path: Assets/Scenes/GameOver/Victory.unity
+    m_guid: 8323eca6dd7c9436b9b1667c4847ba09
   m_HasScriptingDefines: 0
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
@@ -70,8 +82,8 @@ MonoBehaviour:
     - line: '|   m_VirtualRealitySplashScreen: {instanceID: 0}'
     - line: '|   defaultScreenWidth: 1920'
     - line: '|   defaultScreenHeight: 1080'
-    - line: '|   defaultScreenWidthWeb: 1280'
-    - line: '|   defaultScreenHeightWeb: 720'
+    - line: '|   defaultScreenWidthWeb: 960'
+    - line: '|   defaultScreenHeightWeb: 600'
     - line: '|   m_StereoRenderingPath: 0'
     - line: '|   m_ActiveColorSpace: 1'
     - line: '|   unsupportedMSAAFallback: 0'
@@ -171,9 +183,7 @@ MonoBehaviour:
     - line: '|   visionOSBundleVersion: 1.0'
     - line: '|   tvOSBundleVersion: 1.0'
     - line: '|   bundleVersion: 1.0'
-    - line: '|   preloadedAssets:'
-    - line: '|   - {fileID: -944628639613478452, guid: 743de5d2d62f348e18f4aab8c175063b,
-        type: 3}'
+    - line: '|   preloadedAssets: []'
     - line: '|   metroInputSource: 0'
     - line: '|   wsaTransparentSwapchain: 0'
     - line: '|   xboxOneDisableKinectGpuReservation: 1'
@@ -323,10 +333,7 @@ MonoBehaviour:
     - line: '|   androidSymbolsSizeThreshold: 800'
     - line: '|   m_BuildTargetIcons: []'
     - line: '|   m_BuildTargetPlatformIcons: []'
-    - line: '|   m_BuildTargetBatching:'
-    - line: '|   - m_BuildTarget: WebGL'
-    - line: '|     m_StaticBatching: 0'
-    - line: '|     m_DynamicBatching: 0'
+    - line: '|   m_BuildTargetBatching: []'
     - line: '|   m_BuildTargetShaderSettings: []'
     - line: '|   m_BuildTargetGraphicsJobs: []'
     - line: '|   m_BuildTargetGraphicsJobMode: []'
@@ -347,7 +354,10 @@ MonoBehaviour:
     - line: '|   m_BuildTargetGroupLightmapSettings: []'
     - line: '|   m_BuildTargetGroupLoadStoreDebugModeSettings: []'
     - line: '|   m_BuildTargetNormalMapEncoding: []'
-    - line: '|   m_BuildTargetDefaultTextureCompressionFormat: []'
+    - line: '|   m_BuildTargetDefaultTextureCompressionFormat:'
+    - line: '|   - serializedVersion: 3'
+    - line: '|     m_BuildTarget: WebGL'
+    - line: '|     m_Formats: 05000000'
     - line: '|   playModeTestRunnerEnabled: 0'
     - line: '|   runPlayModeTestAsEditModeTest: 0'
     - line: '|   actionOnDotNetUnhandledException: 1'

@@ -128,12 +128,12 @@ TextureImporter:
       name: Button_Start_Highlight_0
       rect:
         serializedVersion: 2
-        x: 10
-        y: 8
-        width: 63
-        height: 89
+        x: 0
+        y: 0
+        width: 330
+        height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -146,99 +146,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Button_Start_Highlight_1
-      rect:
-        serializedVersion: 2
-        x: 69
-        y: 9
-        width: 66
-        height: 82
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b801f05394d5a25c0800000000000000
-      internalID: -4239473530211725173
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Button_Start_Highlight_2
-      rect:
-        serializedVersion: 2
-        x: 125
-        y: 8
-        width: 66
-        height: 84
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4454fc610d5257220800000000000000
-      internalID: 2482932345230804292
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Button_Start_Highlight_3
-      rect:
-        serializedVersion: 2
-        x: 188
-        y: 8
-        width: 73
-        height: 85
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 76d486aa804c341a0800000000000000
-      internalID: -6826397068665795225
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Button_Start_Highlight_4
-      rect:
-        serializedVersion: 2
-        x: 257
-        y: 10
-        width: 70
-        height: 81
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c07c34e48394380a0800000000000000
-      internalID: -6880575299511924980
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: db791e7ca825440c391ce7257646e658
     internalID: 0
     vertices: []
     indices: 
@@ -246,13 +158,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":330.0,"y":100.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Button_Start_Highlight_0: -8188045118489754833
-      Button_Start_Highlight_1: -4239473530211725173
-      Button_Start_Highlight_2: 2482932345230804292
-      Button_Start_Highlight_3: -6826397068665795225
-      Button_Start_Highlight_4: -6880575299511924980
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

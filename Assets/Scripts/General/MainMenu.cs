@@ -3,15 +3,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.U2D.Animation;
 
 public class MainMenu : MonoBehaviour
 {
     InputAction move;
     InputAction enter;
-    public TextMeshProUGUI start;
-    public TextMeshProUGUI exit;
-    Color yellow = new(1,1,0.5f);
-    Color white = new(1,1,1);
+    public SpriteResolver start;
+    public SpriteResolver exit;
 
     int selection = 1;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -29,13 +28,13 @@ public class MainMenu : MonoBehaviour
 
         if (cursor < 0)
         {
-            start.color = white;
-            exit.color = yellow;
+            start.SetCategoryAndLabel("start", "inactive");
+            exit.SetCategoryAndLabel("exit", "active");
             selection = 2;
         }   else if (cursor > 0)
         {
-            start.color = yellow;
-            exit.color = white;
+            start.SetCategoryAndLabel("start", "active");
+            exit.SetCategoryAndLabel("exit", "inactive");
             selection = 1;
         }
     }
@@ -45,6 +44,7 @@ public class MainMenu : MonoBehaviour
         if (selection == 1)
         {
             enter.performed -= Select;
+            move.performed -= Move;
             SceneManager.LoadScene("Main");
         }   else if (selection == 2)
         {
