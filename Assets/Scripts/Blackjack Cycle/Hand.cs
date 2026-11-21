@@ -49,6 +49,8 @@ public abstract class Hand : MonoBehaviour
         {
             bust = true;
         }
+
+        Debug.Log(total);
     }
 
     public virtual void ClearHand()

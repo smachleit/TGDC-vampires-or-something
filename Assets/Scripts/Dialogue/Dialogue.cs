@@ -10,8 +10,6 @@ public class Dialogue
     public void LoadDialogue(TextAsset source)
     {
         paths = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(source.text);
-        Debug.Log(paths);
-        Debug.Log("Loaded " + paths.Count + " events with " + paths.Values.Count + " lines.");
     }
 
     /// <summary>
@@ -28,7 +26,6 @@ public class Dialogue
         }
 
         string[] allDialogue = paths[eventName];
-        Debug.Log(allDialogue);
 
         int index = random.Next(0, allDialogue.Length);
 
